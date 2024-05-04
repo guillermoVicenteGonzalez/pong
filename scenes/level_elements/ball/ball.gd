@@ -1,6 +1,6 @@
-class_name Ball
-
 extends RigidBody2D
+
+class_name Ball
 
 @export var radius:int = 10
 @export var speed:int = 300

@@ -53,8 +53,7 @@ func scoreGoal(body:Node, flag:bool):
 
 func resetLevel(label:Label, ball:Ball, direction:bool, start_pos:Vector2)->void:
 	ball.destroyBall()
-	ball = createBall()
-	print_debug(ball)
+	ball = createBall(start_pos)
 	var timer:Timer = Timer.new()
 	add_child(timer)
 	timer.start(3)
@@ -62,8 +61,9 @@ func resetLevel(label:Label, ball:Ball, direction:bool, start_pos:Vector2)->void
 	ball.startBall(direction)
 	timer.queue_free()
 	
-func createBall()->Ball:
+func createBall(position:Vector2)->Ball:
 	var b = ballScene.instantiate()
 	add_child(b)
+	b.global_position = position
 	return b
 
