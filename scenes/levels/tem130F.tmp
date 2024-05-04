@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3332wnm6hspr"]
+
+[ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
+[ext_resource type="PackedScene" uid="uid://cn284xgpuyx6a" path="res://scenes/ball/ball.tscn" id="3_jmp3y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2h7s"]
+size = Vector2(649, 20)
+
+[node name="TemplateLevel" type="Node2D"]
+
+[node name="upperWall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="upperWall"]
+position = Vector2(314.5, 0)
+shape = SubResource("RectangleShape2D_x2h7s")
+
+[node name="ColorRect" type="ColorRect" parent="upperWall"]
+offset_left = -21.0
+offset_top = -10.0
+offset_right = 706.0
+offset_bottom = 10.0
+
+[node name="upperWall2" type="StaticBody2D" parent="."]
+position = Vector2(3, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="upperWall2"]
+position = Vector2(314.5, 0)
+shape = SubResource("RectangleShape2D_x2h7s")
+
+[node name="ColorRect2" type="ColorRect" parent="upperWall2"]
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 639.0
+offset_bottom = 10.0
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player" parent="." instance=ExtResource("1_vvydk")]
+
+[node name="ball" parent="." instance=ExtResource("3_jmp3y")]

@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://b3332wnm6hspr"]
+
+[ext_resource type="PackedScene" uid="uid://b33ovjhv5xnc8" path="res://scenes/player/playerTemplate.tscn" id="1_fq801"]
+[ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
+[ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
+[ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
+[ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2h7s"]
+size = Vector2(649, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rm24l"]
+size = Vector2(20, 370)
+
+[sub_resource type="Resource" id="Resource_b3tta"]
+script = ExtResource("2_dsfjs")
+speed = 300
+length = 0
+acc = 200
+
+[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "player1_label", "player2_label", "message_board", "stage_center")]
+script = ExtResource("1_y6tow")
+player1_goal = NodePath("stage/playerGoal")
+player2_goal = NodePath("stage/enemyGoal")
+player1_label = NodePath("UI/player1Label")
+player2_label = NodePath("UI/player2Label")
+message_board = NodePath("UI/messageBoard")
+stage_center = NodePath("stage/stageCenter")
+
+[node name="stage" type="Node2D" parent="."]
+
+[node name="upperWall" type="StaticBody2D" parent="stage"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stage/upperWall"]
+position = Vector2(314.5, 0)
+shape = SubResource("RectangleShape2D_x2h7s")
+
+[node name="ColorRect" type="ColorRect" parent="stage/upperWall"]
+offset_left = -21.0
+offset_top = -10.0
+offset_right = 706.0
+offset_bottom = 10.0
+
+[node name="upperWall2" type="StaticBody2D" parent="stage"]
+position = Vector2(3, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stage/upperWall2"]
+position = Vector2(314.5, 0)
+shape = SubResource("RectangleShape2D_x2h7s")
+
+[node name="ColorRect2" type="ColorRect" parent="stage/upperWall2"]
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 639.0
+offset_bottom = 10.0
+
+[node name="playerGoal" parent="stage" instance=ExtResource("5_1koxp")]
+position = Vector2(-16, 0)
+
+[node name="CollisionShape2D" parent="stage/playerGoal" index="0"]
+position = Vector2(0, 175)
+shape = SubResource("RectangleShape2D_rm24l")
+
+[node name="enemyGoal" parent="stage" instance=ExtResource("5_1koxp")]
+position = Vector2(656, 8)
+
+[node name="CollisionShape2D" parent="stage/enemyGoal" index="0"]
+position = Vector2(0, 175)
+shape = SubResource("RectangleShape2D_rm24l")
+
+[node name="stageCenter" type="Marker2D" parent="stage"]
+position = Vector2(320, 184)
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="player1Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 40.0
+offset_right = 336.0
+offset_bottom = 63.0
+text = "0"
+
+[node name="player2Label" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 336.0
+offset_top = 40.0
+offset_right = 376.0
+offset_bottom = 63.0
+grow_horizontal = 2
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="messageBoard" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 96.0
+offset_right = 344.0
+offset_bottom = 119.0
+
+[node name="player" parent="." instance=ExtResource("1_vvydk")]
+player_res = SubResource("Resource_b3tta")
+
+[node name="player2" parent="." instance=ExtResource("1_fq801")]
+position = Vector2(624, 0)
+
+[editable path="stage/playerGoal"]
+[editable path="stage/enemyGoal"]

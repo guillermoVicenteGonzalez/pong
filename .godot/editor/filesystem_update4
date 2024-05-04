@@ -1,0 +1,11 @@
+res://scenes/levels/templateLevel.tscn
+res://scenes/player/playerTemplate.tscn
+res://scenes/player/playerResource.gd
+res://scenes/player/mainPlayer/mainPlayer.tscn
+res://scenes/player/mainPlayer/mainPlayer.gd
+res://scenes/ball/ball.tscn
+res://scenes/ball/ball.gd
+res://scenes/levels/templateLevel.gd
+res://scenes/level_elements/ball/ball.tscn
+res://scenes/level_elements/goal.tscn
+res://scenes/level_elements/ball/ball.gd
