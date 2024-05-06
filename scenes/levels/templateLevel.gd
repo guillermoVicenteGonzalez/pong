@@ -32,7 +32,7 @@ func _ready()->void:
 			resetLevel(body,true,stage_center.position)
 	)
 	ball = createBall(stage_center.position)
-	ball.startBall(true)
+	ball.startBall(false)
 
 func scoreGoal(body:Node, flag:bool):
 	if flag:

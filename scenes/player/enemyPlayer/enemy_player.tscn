@@ -1,5 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://b2uodpgrbkq7t"]
+[gd_scene load_steps=3 format=3 uid="uid://b2uodpgrbkq7t"]
 
 [ext_resource type="PackedScene" uid="uid://b33ovjhv5xnc8" path="res://scenes/player/playerTemplate.tscn" id="1_0h13x"]
+[ext_resource type="Script" path="res://scenes/player/enemyPlayer/enemy_player.gd" id="2_eg2ls"]
 
 [node name="enemyPlayer" instance=ExtResource("1_0h13x")]
+script = ExtResource("2_eg2ls")
+
+[node name="playerBody" parent="." index="0"]
+unique_name_in_owner = true

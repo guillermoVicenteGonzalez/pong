@@ -81,7 +81,6 @@ player_res = SubResource("Resource_b3tta")
 
 [node name="enemyPlayer" parent="." instance=ExtResource("6_0inc0")]
 position = Vector2(624, 168)
-speed = 300
 
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]

@@ -5,11 +5,12 @@ size = Vector2(17, 112)
 
 [node name="player" type="CharacterBody2D" groups=["players"]]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_top = 104.0
+[node name="playerBody" type="ColorRect" parent="."]
+offset_top = -56.0
 offset_right = 16.0
-offset_bottom = 216.0
+offset_bottom = 56.0
+pivot_offset = Vector2(7, 56)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(7.5, 160)
+position = Vector2(8, 0)
 shape = SubResource("RectangleShape2D_doq3l")

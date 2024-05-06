@@ -76,12 +76,11 @@ shape = SubResource("RectangleShape2D_rm24l")
 position = Vector2(320, 184)
 
 [node name="player" parent="." instance=ExtResource("1_vvydk")]
-position = Vector2(0, 168)
 player_res = SubResource("Resource_b3tta")
 
 [node name="enemyPlayer" parent="." instance=ExtResource("6_0inc0")]
-position = Vector2(624, 168)
-speed = 300
+position = Vector2(624, 0)
+speed = 200
 
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]
