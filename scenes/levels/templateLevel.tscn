@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=10 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://b33ovjhv5xnc8" path="res://scenes/player/playerTemplate.tscn" id="1_fq801"]
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
 [ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
 [ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
+[ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x2h7s"]
 size = Vector2(649, 20)
@@ -18,14 +19,17 @@ speed = 300
 length = 0
 acc = 200
 
-[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "player1_label", "player2_label", "message_board", "stage_center")]
+[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "stage_center")]
 script = ExtResource("1_y6tow")
 player1_goal = NodePath("stage/playerGoal")
 player2_goal = NodePath("stage/enemyGoal")
-player1_label = NodePath("UI/player1Label")
-player2_label = NodePath("UI/player2Label")
-message_board = NodePath("UI/messageBoard")
+score_hud = NodePath("UI2/templateScoreHud")
 stage_center = NodePath("stage/stageCenter")
+speed = 2.273
+
+[node name="UI2" type="CanvasLayer" parent="."]
+
+[node name="templateScoreHud" parent="UI2" instance=ExtResource("6_vnie8")]
 
 [node name="stage" type="Node2D" parent="."]
 
@@ -70,42 +74,6 @@ shape = SubResource("RectangleShape2D_rm24l")
 
 [node name="stageCenter" type="Marker2D" parent="stage"]
 position = Vector2(320, 184)
-
-[node name="UI" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="player1Label" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 296.0
-offset_top = 40.0
-offset_right = 336.0
-offset_bottom = 63.0
-text = "0"
-
-[node name="player2Label" type="Label" parent="UI"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 336.0
-offset_top = 40.0
-offset_right = 376.0
-offset_bottom = 63.0
-grow_horizontal = 2
-text = "0"
-metadata/_edit_use_anchors_ = true
-
-[node name="messageBoard" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 304.0
-offset_top = 96.0
-offset_right = 344.0
-offset_bottom = 119.0
 
 [node name="player" parent="." instance=ExtResource("1_vvydk")]
 player_res = SubResource("Resource_b3tta")

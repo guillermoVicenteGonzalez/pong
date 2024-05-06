@@ -30,6 +30,8 @@ func resetBall(position:Vector2)->void:
 func destroyBall():
 	queue_free()
 
+func setSpeed(num:int):
+	speed = num
 	
 func startBall(flag:bool):
 	if flag:

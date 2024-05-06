@@ -6,11 +6,9 @@ extends Node2D
 @export var player1_goal:Area2D
 @export var player2_goal:Area2D	
 
-#this should be its own node with a script
+
 @export_category("UI")
-@export var player1_label:Label
-@export var player2_label:Label
-@export var message_board:Label
+@export var score_hud:ScoreHUD
 
 @export_subgroup("level settings")
 @export var stage_center:Marker2D
@@ -20,49 +18,48 @@ extends Node2D
 
 var player1_score:int = 0
 var player2_score:int = 0
-#var ballScene:PackedScene
 var ball:Ball
 
 func _ready()->void:
 	player1_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,true)
-			resetLevel(message_board,body,false,stage_center.position)
+			resetLevel(body,false,stage_center.position)
 	)
-	#player2_goal.body_entered.connect(scoreGoal.bind(false))
 	player2_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,false)
-			resetLevel(message_board,body,true,stage_center.position)
+			resetLevel(body,true,stage_center.position)
 	)
-
-	ball = ballScene.instantiate()
-	add_child(ball)
+	ball = createBall(stage_center.position)
 	ball.startBall(true)
-	#ball = get_tree().get_first_node_in_group("ball")
-
 
 func scoreGoal(body:Node, flag:bool):
 	if flag:
 		player2_score +=1
-		player2_label.text = str(player2_score)
+		score_hud.setPlayerScore(player2_score,2)
 	else:
 		player1_score +=1
-		player1_label.text = str(player1_score)
+		score_hud.setPlayerScore(player1_score,1)
 
 
-func resetLevel(label:Label, ball:Ball, direction:bool, start_pos:Vector2)->void:
+func resetLevel(ball:Ball, direction:bool, start_pos:Vector2)->void:
 	ball.destroyBall()
 	ball = createBall(start_pos)
 	var timer:Timer = Timer.new()
 	add_child(timer)
-	timer.start(3)
-	await timer.timeout
+	score_hud.toggleMessage(true)
+	for i in 3:
+		score_hud.setMessage(str(3 - i))
+		timer.start(1)
+		await timer.timeout
+	score_hud.toggleMessage(false)
 	ball.startBall(direction)
 	timer.queue_free()
 	
 func createBall(position:Vector2)->Ball:
 	var b = ballScene.instantiate()
+	b.setSpeed(300 * speed)
 	add_child(b)
 	b.global_position = position
 	return b
