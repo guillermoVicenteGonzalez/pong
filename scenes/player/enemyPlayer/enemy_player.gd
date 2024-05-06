@@ -3,6 +3,8 @@ extends CharacterBody2D
 @onready var player_body: ColorRect = %playerBody
 
 @export var speed:int = 300
+@export_range(1,10) var difficulty
+
 var safeRange:int
 
 func _ready() -> void:
@@ -15,15 +17,14 @@ func _physics_process(delta: float) -> void:
 	if ball:
 		var ballPos:float = ball.position.y
 		velocity = handleMovement(ballPos,speed)
-		#velocity = handleSmoothMovement(ballPos)
 	move_and_slide()
 
 
 func handleMovement(ballPos:float, speed:float)->Vector2:
 	var direction = ballPos - position.y
-	if direction > safeRange:
+	if direction > safeRange and randf() > .5:
 		return Vector2(0, speed)
-	elif direction < -safeRange:
+	elif direction < -safeRange and randf() > .5:
 		return Vector2(0,speed) * -1
 	else:
 		return Vector2(0,0)

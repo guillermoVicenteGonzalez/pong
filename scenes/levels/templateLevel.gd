@@ -15,6 +15,7 @@ extends Node2D
 @export_range(1,10) var difficulty
 @export_range(1,10) var speed
 @export var winCondition:int = 10
+@export var size: int = 10
 
 var player1_score:int = 0
 var player2_score:int = 0
@@ -24,12 +25,18 @@ func _ready()->void:
 	player1_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,true)
-			resetLevel(body,false,stage_center.position)
+			if player2_score == winCondition:
+				gameOver(2)
+			else:
+				resetLevel(body,false,stage_center.position)
 	)
 	player2_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,false)
-			resetLevel(body,true,stage_center.position)
+			if player1_score == winCondition:
+				gameOver(1)
+			else:
+				resetLevel(body,true,stage_center.position)
 	)
 	ball = createBall(stage_center.position)
 	ball.startBall(false)
@@ -44,7 +51,7 @@ func scoreGoal(body:Node, flag:bool):
 
 
 func resetLevel(ball:Ball, direction:bool, start_pos:Vector2)->void:
-	ball.destroyBall()
+	await ball.destroyBall() #we wait until the ball has exited the tree so that we can use the same name
 	ball = createBall(start_pos)
 	var timer:Timer = Timer.new()
 	add_child(timer)
@@ -61,6 +68,13 @@ func createBall(position:Vector2)->Ball:
 	var b = ballScene.instantiate()
 	b.setSpeed(300 * speed)
 	add_child(b)
+	b.name="ball"
+	print_debug("added ball: " + str(b))
+	print_debug("name: " + b.name)
 	b.global_position = position
 	return b
 
+func gameOver(playerIndex:int):
+	get_tree().paused = true
+	score_hud.setMessage("player " + str(playerIndex) + " wins!!")
+	score_hud.toggleMessage(true)

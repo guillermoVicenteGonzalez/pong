@@ -25,7 +25,8 @@ player1_goal = NodePath("stage/playerGoal")
 player2_goal = NodePath("stage/enemyGoal")
 score_hud = NodePath("UI2/templateScoreHud")
 stage_center = NodePath("stage/stageCenter")
-speed = 1.0
+speed = 2.0
+winCondition = 3
 
 [node name="UI2" type="CanvasLayer" parent="."]
 
@@ -81,7 +82,6 @@ player_res = SubResource("Resource_b3tta")
 
 [node name="enemyPlayer" parent="." instance=ExtResource("6_0inc0")]
 position = Vector2(624, 168)
-speed = 300
 
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]
