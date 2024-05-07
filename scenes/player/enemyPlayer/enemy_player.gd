@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Player
 
 
 @onready var player_body: ColorRect = %playerBody
@@ -11,14 +11,13 @@ const maxDiff:int = 10
 var diffMarg:int = 0
 
 #========================================
-# Lyfecicle
+# Lifecycle
 #========================================
 
 func _ready() -> void:
 	#safeRange = player_body.size.y /4
 	safeRange =calculateSafeMargin(difficulty,player_body.size.y)
 	diffMarg = calculateDiffMargin(difficulty, maxDiff)
-	print_debug(diffMarg)
 	pass
 	
 func _physics_process(delta: float) -> void:
@@ -54,7 +53,6 @@ func calculateDiffMargin(diff:float, max:float)->float:
 	elif diff > maxDiff:
 		diff = maxDiff
 	var temp:float = (max - diff)/10
-	print_debug("max: " + str(max) + " - diff: " + str(diff) + " = " + str(temp))
 	return temp
 
 #more margin == more difficult (greater size margin)
@@ -68,5 +66,3 @@ func calculateSafeMargin(diff:int, size:float):
 func setDifficulty(diff:int):
 	difficulty = diff
 	
-func resetPosition(pos:int):
-	position.y = pos

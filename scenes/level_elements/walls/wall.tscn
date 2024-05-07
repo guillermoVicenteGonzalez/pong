@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://645o0nlmtucu"]
+
+[ext_resource type="Script" path="res://scenes/level_elements/walls/wall.gd" id="1_xg3r0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kc878"]
+size = Vector2(8, 8)
+
+[node name="wall" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_xg3r0")
+
+[node name="shape" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="collision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_kc878")

@@ -5,3 +5,4 @@
 
 [node name="player" groups=["mainPlayer"] instance=ExtResource("1_wpbdq")]
 script = ExtResource("2_l4nck")
+player_res = null

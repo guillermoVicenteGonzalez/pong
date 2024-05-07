@@ -1,0 +1,82 @@
+[gd_scene load_steps=14 format=3 uid="uid://b3332wnm6hspr"]
+
+[ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
+[ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
+[ext_resource type="PackedScene" uid="uid://645o0nlmtucu" path="res://scenes/level_elements/walls/wall.tscn" id="2_6wun7"]
+[ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
+[ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
+[ext_resource type="PackedScene" uid="uid://b2uodpgrbkq7t" path="res://scenes/player/enemyPlayer/enemy_player.tscn" id="6_0inc0"]
+[ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_wupvv"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_o4nxp"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_ufa7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rm24l"]
+size = Vector2(20, 370)
+
+[sub_resource type="Resource" id="Resource_b3tta"]
+script = ExtResource("2_dsfjs")
+speed = 300
+length = 0
+acc = 200
+
+[sub_resource type="Resource" id="Resource_rn1tq"]
+script = ExtResource("10_ufa7l")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "stage_center")]
+process_mode = 3
+script = ExtResource("1_y6tow")
+player1_goal = NodePath("stage/playerGoal")
+player2_goal = NodePath("stage/enemyGoal")
+score_hud = NodePath("UI2/templateScoreHud")
+wall_resource = ExtResource("2_6wun7")
+stage_center = NodePath("stage/stageCenter")
+difficulty = 1.0
+speed = 2.0
+winCondition = 3
+size = 1000
+
+[node name="UI2" type="CanvasLayer" parent="."]
+
+[node name="templateScoreHud" parent="UI2" instance=ExtResource("6_vnie8")]
+
+[node name="stage" type="Node2D" parent="."]
+
+[node name="playerGoal" parent="stage" instance=ExtResource("5_1koxp")]
+position = Vector2(-16, 0)
+
+[node name="CollisionShape2D" parent="stage/playerGoal" index="0"]
+position = Vector2(0, 175)
+shape = SubResource("RectangleShape2D_rm24l")
+
+[node name="enemyGoal" parent="stage" instance=ExtResource("5_1koxp")]
+position = Vector2(656, 8)
+
+[node name="CollisionShape2D" parent="stage/enemyGoal" index="0"]
+position = Vector2(0, 175)
+shape = SubResource("RectangleShape2D_rm24l")
+
+[node name="stageCenter" type="Marker2D" parent="stage"]
+position = Vector2(320, 184)
+
+[node name="player" parent="." instance=ExtResource("1_vvydk")]
+position = Vector2(0, 168)
+player_res = SubResource("Resource_b3tta")
+
+[node name="enemyPlayer" parent="." instance=ExtResource("6_0inc0")]
+position = Vector2(624, 168)
+difficulty = 10.0
+
+[node name="PhantomCameraHost" type="Node" parent="."]
+script = ExtResource("8_wupvv")
+
+[node name="mainCamera" type="Node2D" parent="."]
+position = Vector2(320, 184)
+script = ExtResource("9_o4nxp")
+tween_resource = SubResource("Resource_rn1tq")
+
+[editable path="stage/playerGoal"]
+[editable path="stage/enemyGoal"]

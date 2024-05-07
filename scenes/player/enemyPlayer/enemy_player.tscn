@@ -5,6 +5,5 @@
 
 [node name="enemyPlayer" groups=["enemyPlayer"] instance=ExtResource("1_0h13x")]
 script = ExtResource("2_eg2ls")
-
-[node name="playerBody" parent="." index="0"]
-unique_name_in_owner = true
+speed = 300
+difficulty = null
