@@ -1,15 +1,24 @@
 extends CharacterBody2D
 
+
 @onready var player_body: ColorRect = %playerBody
 
 @export var speed:int = 300
-@export_range(1,10) var difficulty
+@export_range(1,maxDiff) var difficulty
 
 var safeRange:int
+const maxDiff:int = 10
+var diffMarg:int = 0
+
+#========================================
+# Lyfecicle
+#========================================
 
 func _ready() -> void:
-	safeRange = player_body.size.y /4
-	print_debug("safe range: " + str(safeRange))
+	#safeRange = player_body.size.y /4
+	safeRange =calculateSafeMargin(difficulty,player_body.size.y)
+	diffMarg = calculateDiffMargin(difficulty, maxDiff)
+	print_debug(diffMarg)
 	pass
 	
 func _physics_process(delta: float) -> void:
@@ -19,16 +28,45 @@ func _physics_process(delta: float) -> void:
 		velocity = handleMovement(ballPos,speed)
 	move_and_slide()
 
-
+#========================================
+# Movement
+#========================================
 func handleMovement(ballPos:float, speed:float)->Vector2:
 	var direction = ballPos - position.y
-	if direction > safeRange and randf() > .5:
+	if direction > safeRange and randf() > diffMarg:
 		return Vector2(0, speed)
-	elif direction < -safeRange and randf() > .5:
+	elif direction < -safeRange and randf() > diffMarg:
 		return Vector2(0,speed) * -1
 	else:
 		return Vector2(0,0)
 
 func handleSmoothMovement(ballPos:float) -> Vector2:
 	return Vector2(0,ballPos - position.y)
+	
+#========================================
+# Utility (Difficulty)
+#========================================
 
+#higher margin == less difficult
+func calculateDiffMargin(diff:float, max:float)->float:
+	if diff < 0:
+		diff = 0
+	elif diff > maxDiff:
+		diff = maxDiff
+	var temp:float = (max - diff)/10
+	print_debug("max: " + str(max) + " - diff: " + str(diff) + " = " + str(temp))
+	return temp
+
+#more margin == more difficult (greater size margin)
+func calculateSafeMargin(diff:int, size:float):
+	return size/(diff/1.6)
+	
+#========================================
+# EXPOSED (getters and setters)
+#========================================
+
+func setDifficulty(diff:int):
+	difficulty = diff
+	
+func resetPosition(pos:int):
+	position.y = pos

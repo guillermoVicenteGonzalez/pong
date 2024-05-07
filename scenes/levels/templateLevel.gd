@@ -1,3 +1,5 @@
+class_name base_level
+
 extends Node2D
 
 @onready var ballScene = preload("res://scenes/level_elements/ball/ball.tscn")
@@ -20,8 +22,10 @@ extends Node2D
 var player1_score:int = 0
 var player2_score:int = 0
 var ball:Ball
+var players:Array
 
 func _ready()->void:
+	players = get_tree().get_nodes_in_group("players")
 	player1_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,true)
@@ -52,6 +56,8 @@ func scoreGoal(body:Node, flag:bool):
 
 func resetLevel(ball:Ball, direction:bool, start_pos:Vector2)->void:
 	await ball.destroyBall() #we wait until the ball has exited the tree so that we can use the same name
+	resetPlayersPos()
+	get_tree().paused = true
 	ball = createBall(start_pos)
 	var timer:Timer = Timer.new()
 	add_child(timer)
@@ -63,14 +69,17 @@ func resetLevel(ball:Ball, direction:bool, start_pos:Vector2)->void:
 	score_hud.toggleMessage(false)
 	ball.startBall(direction)
 	timer.queue_free()
+	get_tree().paused = false
+
+func resetPlayersPos():
+	for player in players:
+		player.resetPosition(stage_center.position.y)
 	
 func createBall(position:Vector2)->Ball:
 	var b = ballScene.instantiate()
 	b.setSpeed(300 * speed)
 	add_child(b)
 	b.name="ball"
-	print_debug("added ball: " + str(b))
-	print_debug("name: " + b.name)
 	b.global_position = position
 	return b
 
@@ -78,3 +87,4 @@ func gameOver(playerIndex:int):
 	get_tree().paused = true
 	score_hud.setMessage("player " + str(playerIndex) + " wins!!")
 	score_hud.toggleMessage(true)
+

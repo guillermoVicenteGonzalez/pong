@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://b33ovjhv5xnc8" path="res://scenes/player/playerTemplate.tscn" id="1_wpbdq"]
 [ext_resource type="Script" path="res://scenes/player/mainPlayer/mainPlayer.gd" id="2_l4nck"]
 
-[node name="player" instance=ExtResource("1_wpbdq")]
+[node name="player" groups=["mainPlayer"] instance=ExtResource("1_wpbdq")]
 script = ExtResource("2_l4nck")

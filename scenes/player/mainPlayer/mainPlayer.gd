@@ -17,3 +17,7 @@ func handleAccMovement(dir:Vector2, speed:int, acc:int, vel:Vector2, delta:float
 func handleMovement(dir:Vector2, speed:int)->Vector2:
 	var v:Vector2 = speed * dir
 	return v
+
+func resetPosition(pos:int)->void:
+	print_debug("reseting position")
+	position.y = pos

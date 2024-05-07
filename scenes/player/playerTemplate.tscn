@@ -4,6 +4,7 @@
 size = Vector2(17, 112)
 
 [node name="player" type="CharacterBody2D" groups=["players"]]
+process_mode = 1
 
 [node name="playerBody" type="ColorRect" parent="."]
 offset_top = -56.0
