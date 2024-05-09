@@ -28,14 +28,15 @@ func resetBall(position:Vector2)->void:
 	direction = 0
 	
 func destroyBall():
+#animacion
 	queue_free()
 	await tree_exited
 
 func setSpeed(num:int):
 	speed = num
 	
-func startBall(flag:bool):
-	if flag:
+func startBall(dir:int):
+	if dir >= 0:
 		direction = 1
 	else:
 		direction = -1

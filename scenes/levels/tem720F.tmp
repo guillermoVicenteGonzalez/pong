@@ -31,9 +31,10 @@ player2_goal = NodePath("stage/enemyGoal")
 score_hud = NodePath("UI2/templateScoreHud")
 wall_resource = ExtResource("2_6wun7")
 mainCamera = NodePath("mainCamera")
-speed = 3.98
+difficulty = 1.0
+speed = 2.0
 winCondition = 3
-size = 800
+size = 1000
 
 [node name="UI2" type="CanvasLayer" parent="."]
 

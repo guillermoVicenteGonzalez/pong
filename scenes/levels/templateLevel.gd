@@ -18,7 +18,6 @@ extends Node2D
 @export var mainCamera:PhantomCamera2D
 
 @export_group("level settings")
-#@export var stage_center:Marker2D
 @export_range(1,10) var difficulty
 @export_range(1,10) var speed
 @export var winCondition:int = 10
@@ -40,28 +39,30 @@ var VSize:float
 
 func _ready()->void:
 	players = get_tree().get_nodes_in_group("players") as Array[Player]
+	size = setupDimensions(size)
+	print_debug(size)
 	HSize = size
 	VSize = size / 2
 	stage_center = Vector2(HSize/2, VSize /2)
 	generateStage(HSize, VSize)
-	resetLevel(ball, false, stage_center)
-	initializePlayerPos(players, HSize, VSize)
+	resetLevel(ball, 1, stage_center)
+	initializePlayersPos(players, HSize, VSize)
 	
 	player1_goal.body_entered.connect(
 		func(body:Node):
-			scoreGoal(body,true)
+			scoreGoal(body,2)
 			if player2_score == winCondition:
 				gameOver(2)
 			else:
-				resetLevel(body,false,stage_center)
+				resetLevel(body,-1,stage_center)
 	)
 	player2_goal.body_entered.connect(
 		func(body:Node):
-			scoreGoal(body,false)
+			scoreGoal(body,1)
 			if player1_score == winCondition:
 				gameOver(1)
 			else:
-				resetLevel(body,true,stage_center)
+				resetLevel(body,1,stage_center)
 	)
 	#ball = createBall(stage_center)
 	#ball.startBall(false)
@@ -78,6 +79,12 @@ func createBall(position:Vector2)->Ball:
 	b.global_position = position
 	return b
 	
+func setupDimensions(size:int)->int:
+	if size <= 600:
+		return 600
+	elif size >= 2000:
+		return 2000
+	return size
 func generateStage(sizeX:int, sizeY:int)->void:
 	var screenCenter = Vector2(sizeX/2, sizeY/2)
 	var wallMargin = 100
@@ -98,25 +105,28 @@ func generateStage(sizeX:int, sizeY:int)->void:
 	player2_goal.setSize(sizeY)
 	player2_goal.setPosition(Vector2(sizeX +50 ,screenCenter.y))
 	
-	mainCamera.zoom = Vector2(1,1)
+	var z:float = calculateZoom(sizeX)
+	print_debug(z)
+	var zoom = Vector2(z,z)
+	mainCamera.zoom = zoom
 	mainCamera.position = screenCenter
 
 #========================================
 # FUNCTIONALITY
 #========================================
 
-func scoreGoal(body:Node, flag:bool):
-	if flag:
+func scoreGoal(body:Node, flag:int):
+	if flag == 2:
 		player2_score +=1
 		score_hud.setPlayerScore(player2_score,2)
-	else:
+	elif flag == 1:
 		player1_score +=1
 		score_hud.setPlayerScore(player1_score,1)
 
-func resetLevel(ball:Ball, direction:bool, start_pos:Vector2)->void:
+func resetLevel(ball:Ball, direction:int, start_pos:Vector2)->void:
 	if ball != null:
 		await ball.destroyBall() #we wait until the ball has exited the tree so that we can use the same name
-	initializePlayerPos(players, HSize, VSize)
+	initializePlayersPos(players, HSize, VSize) 
 	get_tree().paused = true
 	ball = createBall(start_pos)
 	var timer:Timer = Timer.new()
@@ -132,7 +142,7 @@ func resetLevel(ball:Ball, direction:bool, start_pos:Vector2)->void:
 	get_tree().paused = false
 
 
-func initializePlayerPos(players:Array, sizeX:float, sizeY:float):
+func initializePlayersPos(players:Array, sizeX:float, sizeY:float):
 	var middle = sizeY/2
 	(players[0] as Player).setPosition(Vector2(0, middle))
 	(players[1] as Player).setPosition(Vector2(sizeX,middle))
@@ -142,3 +152,9 @@ func gameOver(playerIndex:int):
 	score_hud.setMessage("player " + str(playerIndex) + " wins!!")
 	score_hud.toggleMessage(true)
 
+func calculateZoom(size:float)->float:
+	var zoom =(size / 1000) - (size / 8000)
+	if zoom < 0.1:
+		return 0.1
+	return (size / 1000) - (size / 8000)
+	#return 1 - (size / 600)
