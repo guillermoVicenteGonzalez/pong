@@ -1,0 +1,90 @@
+[gd_scene load_steps=3 format=3 uid="uid://cemlxawo886ih"]
+
+[ext_resource type="Theme" uid="uid://b2pndf3ulfxwh" path="res://scenes/ui/themes/default.tres" id="1_fjf8y"]
+[ext_resource type="Script" path="res://scenes/ui/menus/options/volumeSlider.gd" id="2_q1x1i"]
+
+[node name="optionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_fjf8y")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Options
+"
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="Sound" type="ScrollContainer" parent="MarginContainer/VSplitContainer/TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VSplitContainer/TabContainer/Sound"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_right = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "General
+"
+
+[node name="generalSoundSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_q1x1i")
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Music
+"
+
+[node name="musicSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_q1x1i")
+bus_name = "Music"
+
+[node name="Label3" type="Label" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Effects
+"
+
+[node name="EffectsSlider" type="HSlider" parent="MarginContainer/VSplitContainer/TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_q1x1i")
+bus_name = "Effects"
+
+[node name="Graphics" type="MarginContainer" parent="MarginContainer/VSplitContainer/TabContainer"]
+visible = false
+layout_mode = 2

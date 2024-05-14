@@ -32,3 +32,6 @@ func toggleVisible(flag:bool)->bool:
 		else:
 			hide()
 	return visible
+
+func quitGame():
+	get_tree().quit()
