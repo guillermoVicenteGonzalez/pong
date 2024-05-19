@@ -5,5 +5,5 @@ MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
-VBoxContainer/constants/separation = 15
+VBoxContainer/constants/separation = 10
 VSplitContainer/constants/separation = 0

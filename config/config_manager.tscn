@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbmdie8xevont"]
+
+[ext_resource type="Script" path="res://config/ConfigManager.gd" id="1_jpgww"]
+
+[node name="ConfigManager" type="Node"]
+script = ExtResource("1_jpgww")

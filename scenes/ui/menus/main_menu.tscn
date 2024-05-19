@@ -1,12 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfvsp32vy3ebf"]
+[gd_scene load_steps=5 format=3 uid="uid://cfvsp32vy3ebf"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/main_menu.gd" id="1_00yky"]
 [ext_resource type="Theme" uid="uid://b2pndf3ulfxwh" path="res://scenes/ui/themes/default.tres" id="1_rflfn"]
+[ext_resource type="PackedScene" uid="uid://cemlxawo886ih" path="res://scenes/ui/menus/options/options_menu.tscn" id="3_qrpjm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibuw6"]
 font_size = 30
 
-[node name="mainMenu" type="Control"]
+[node name="menuRoot" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +17,8 @@ grow_vertical = 2
 theme = ExtResource("1_rflfn")
 script = ExtResource("1_00yky")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MainMenuparent" type="MarginContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,42 +26,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VSplitContainer" type="VSplitContainer" parent="MarginContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="MainMenuparent"]
 layout_mode = 2
 
-[node name="titleLabel" type="Label" parent="MarginContainer/VSplitContainer"]
+[node name="titleLabel" type="Label" parent="MainMenuparent/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "(something) Pong"
 label_settings = SubResource("LabelSettings_ibuw6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuparent/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="normalModeBtn" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="normalModeBtn" type="Button" parent="MainMenuparent/VSplitContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Normal mode"
 
-[node name="deckModeBtn" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="deckModeBtn" type="Button" parent="MainMenuparent/VSplitContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Deck mode"
 
-[node name="optionsBtn" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="optionsBtn" type="Button" parent="MainMenuparent/VSplitContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Options
 "
 
-[node name="quitBtn" type="Button" parent="MarginContainer/VSplitContainer/VBoxContainer"]
+[node name="quitBtn" type="Button" parent="MainMenuparent/VSplitContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Quit
 "
+
+[node name="optionsMenu" parent="." instance=ExtResource("3_qrpjm")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="button_down" from="MainMenuparent/VSplitContainer/VBoxContainer/optionsBtn" to="." method="_on_options_btn_button_down"]
+[connection signal="back" from="optionsMenu" to="." method="_on_options_menu_back"]

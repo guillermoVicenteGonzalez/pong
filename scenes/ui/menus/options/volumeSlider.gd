@@ -5,10 +5,9 @@ extends HSlider
 var bus_index:int
 
 func _ready() -> void:
-	bus_index = AudioServer.get_bus_index(bus_name)
-	value_changed.connect(valueChangeCB)
+	value = SoundManager.getBusVolume(bus_name)
+	drag_ended.connect(valueChangeCB)
+	pass
 	
-	value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
-	
-func valueChangeCB():
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
+func valueChangeCB(nValue:float)->void:
+	SoundManager.setBusVolume(bus_name,value)

@@ -14,6 +14,12 @@ config/name="Pong"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+LevelTransitions="*res://scenes/singletons/level_transitions.tscn"
+SoundManager="*res://scenes/singletons/SoundManager.gd"
+ConfigManager="*res://config/ConfigManager.gd"
+
 [display]
 
 window/size/viewport_width=640
