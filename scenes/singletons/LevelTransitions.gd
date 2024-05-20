@@ -9,7 +9,7 @@ func fadeToBlack()->void:
 func fadeFromBlack()->void:
 	animation_player.play("fadeFromBlack")
 	await animation_player.animation_finished
-
+	
 func playTransition(animationName:String)->void:
 	var animList:PackedStringArray = animation_player.get_animation_list()
 	if animList.has(animationName):

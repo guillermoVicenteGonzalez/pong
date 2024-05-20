@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfvsp32vy3ebf"]
+[gd_scene load_steps=6 format=3 uid="uid://cfvsp32vy3ebf"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/main_menu.gd" id="1_00yky"]
 [ext_resource type="Theme" uid="uid://b2pndf3ulfxwh" path="res://scenes/ui/themes/default.tres" id="1_rflfn"]
 [ext_resource type="PackedScene" uid="uid://cemlxawo886ih" path="res://scenes/ui/menus/options/options_menu.tscn" id="3_qrpjm"]
+[ext_resource type="PackedScene" uid="uid://4w8ihiseoqde" path="res://scenes/ui/menus/normal_mode_menu.tscn" id="4_wbfmp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ibuw6"]
 font_size = 30
@@ -71,5 +72,11 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="normalModeMenu" parent="." instance=ExtResource("4_wbfmp")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="button_down" from="MainMenuparent/VSplitContainer/VBoxContainer/normalModeBtn" to="." method="_on_normal_mode_btn_button_down"]
 [connection signal="button_down" from="MainMenuparent/VSplitContainer/VBoxContainer/optionsBtn" to="." method="_on_options_btn_button_down"]
 [connection signal="back" from="optionsMenu" to="." method="_on_options_menu_back"]

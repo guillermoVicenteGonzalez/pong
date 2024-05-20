@@ -1,4 +1,4 @@
-
+class_name template_level
 
 extends Node2D
 
@@ -47,6 +47,7 @@ func _ready()->void:
 	generateStage(HSize, VSize)
 	resetLevel(ball, 1, stage_center)
 	initializePlayersPos(players, HSize, VSize)
+	print_debug(speed)
 	
 	player1_goal.body_entered.connect(
 		func(body:Node):
@@ -158,3 +159,19 @@ func calculateZoom(size:float)->float:
 		return 0.1
 	return (size / 1000) - (size / 8000)
 	#return 1 - (size / 600)
+
+#========================================
+# GETTERS AND SETTERS
+#========================================
+
+func setDiff(nDif:int)->void:
+	if nDif > 10:
+		difficulty = 10
+	elif nDif < 10:
+		difficulty = 0
+		
+func setSize(nSize:int)->void:
+	size = nSize
+	
+func setSpeed(nSpeed:int)->void:
+	speed = nSpeed
