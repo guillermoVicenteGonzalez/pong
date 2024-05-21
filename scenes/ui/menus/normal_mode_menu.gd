@@ -19,15 +19,16 @@ func _ready():
 	speed = speed_slider.value
 	level_size = size_slider.value
 	
-	diff_slider.changed.connect(func():
+	diff_slider.drag_ended.connect(func(value_changed:bool):
+		print("im chaning. My current value is: " + str(diff_slider.value))
 		diff = diff_slider.value
 	)
 	
-	speed_slider.changed.connect(func():
+	speed_slider.drag_ended.connect(func(value_changed:bool):
 		speed = speed_slider.value
 	)
 	
-	size_slider.changed.connect(func():
+	size_slider.drag_ended.connect(func(value_changed:bool):
 		level_size = size_slider.value
 	)
 

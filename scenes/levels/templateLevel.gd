@@ -38,9 +38,9 @@ var VSize:float
 #========================================
 
 func _ready()->void:
+	_printParameters()
 	players = get_tree().get_nodes_in_group("players") as Array[Player]
 	size = setupDimensions(size)
-	print_debug(size)
 	HSize = size
 	VSize = size / 2
 	stage_center = Vector2(HSize/2, VSize /2)
@@ -175,3 +175,13 @@ func setSize(nSize:int)->void:
 	
 func setSpeed(nSpeed:int)->void:
 	speed = nSpeed
+	
+#========================================
+# DEBUG
+#========================================
+## Prints out size, ball speed and enemy difficulty
+func _printParameters()->void:
+	print_debug("level parameters")
+	print("size: " + str(size))
+	print("ball speed: " + str(speed))
+	print("difficulty: " + str(difficulty))

@@ -13,7 +13,6 @@ func _ready() -> void:
 		setupConfigFile(config)
 	else:
 		loadConfigValues(config)
-		SoundManager.printBusValues()
 
 	SoundManager.masterVolumeChanged.connect(func(n:float):
 		setBusVolumeConfig("master",n)
