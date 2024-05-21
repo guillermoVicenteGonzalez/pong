@@ -107,7 +107,7 @@ func generateStage(sizeX:int, sizeY:int)->void:
 	player2_goal.setPosition(Vector2(sizeX +50 ,screenCenter.y))
 	
 	var z:float = calculateZoom(sizeX)
-	print_debug(z)
+	print_debug("zoom: " + str(z))
 	var zoom = Vector2(z,z)
 	mainCamera.zoom = zoom
 	mainCamera.position = screenCenter
@@ -154,16 +154,17 @@ func gameOver(playerIndex:int):
 	score_hud.toggleMessage(true)
 
 func calculateZoom(size:float)->float:
-	var zoom =(size / 1000) - (size / 8000)
-	if zoom < 0.1:
-		return 0.1
-	return (size / 1000) - (size / 8000)
-	#return 1 - (size / 600)
+	var decrement = (size - 600)/100
+	const rate = 0.07
+	const baseZoom = 0.75
+	
+	return baseZoom - rate * decrement
 
 #========================================
 # GETTERS AND SETTERS
 #========================================
 
+## Sets difficulty
 func setDiff(nDif:int)->void:
 	if nDif > 10:
 		difficulty = 10

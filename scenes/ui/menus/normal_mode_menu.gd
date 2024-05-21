@@ -1,7 +1,7 @@
 extends Menu
 
 @export var levelFile:PackedScene
-#@export var levelFile:String
+
 @onready var diff_slider: HSlider = %diffSlider
 @onready var speed_slider: HSlider = %speedSlider
 @onready var size_slider: HSlider = %sizeSlider
@@ -47,8 +47,6 @@ func playGame():
 	get_tree().root.add_child(levelInstance)
 	get_tree().paused = false
 	queue_free()
-
-
 
 
 func _on_play_btn_button_down() -> void:

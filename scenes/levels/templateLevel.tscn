@@ -33,7 +33,7 @@ wall_resource = ExtResource("2_6wun7")
 mainCamera = NodePath("mainCamera")
 speed = 3.98
 winCondition = 3
-size = 800
+size = 1000
 
 [node name="UI2" type="CanvasLayer" parent="."]
 
