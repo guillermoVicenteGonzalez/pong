@@ -1,9 +1,10 @@
 [gd_resource type="Theme" format=3 uid="uid://b2pndf3ulfxwh"]
 
 [resource]
+HBoxContainer/constants/separation = 10
 MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
 MarginContainer/constants/margin_top = 20
-VBoxContainer/constants/separation = 10
+VBoxContainer/constants/separation = 15
 VSplitContainer/constants/separation = 0

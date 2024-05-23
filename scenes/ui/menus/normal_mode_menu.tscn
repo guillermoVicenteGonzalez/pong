@@ -117,3 +117,4 @@ text = "Back
 "
 
 [connection signal="button_down" from="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/playBtn" to="." method="_on_play_btn_button_down"]
+[connection signal="button_down" from="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/HBoxContainer/backBtn" to="." method="_on_back_btn_button_down"]

@@ -51,3 +51,9 @@ func playGame():
 
 func _on_play_btn_button_down() -> void:
 	playGame()
+
+
+func _on_back_btn_button_down() -> void:
+	toggleVisible(false)
+	back.emit()
+	pass # Replace with function body.

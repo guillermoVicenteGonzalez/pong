@@ -22,6 +22,7 @@ extends Node2D
 @export_range(1,10) var speed
 @export var winCondition:int = 10
 @export var size: int = 10
+@export var stageColor:Color
 
 var player1_score:int = 0
 var player2_score:int = 0
@@ -38,7 +39,7 @@ var VSize:float
 #========================================
 
 func _ready()->void:
-	_printParameters()
+	setBgColor()
 	players = get_tree().get_nodes_in_group("players") as Array[Player]
 	size = setupDimensions(size)
 	HSize = size
@@ -186,3 +187,8 @@ func _printParameters()->void:
 	print("size: " + str(size))
 	print("ball speed: " + str(speed))
 	print("difficulty: " + str(difficulty))
+
+func setBgColor(nColor:Color = Color.BLACK):
+	RenderingServer.set_default_clear_color(nColor)
+
+	
