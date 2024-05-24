@@ -72,5 +72,6 @@ zoom = Vector2(0.8, 0.8)
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("8_wupvv")
 
+[editable path="UI-CONTAINER/pauseMenu"]
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]

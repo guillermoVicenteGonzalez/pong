@@ -10,6 +10,7 @@ var isVisible:bool = false
 
 func _ready() -> void:
 	visible = isVisible
+	options_menu.back.connect(onOptionsMenuBack)
 	pass
 	
 func _process(delta: float) -> void:
@@ -35,6 +36,24 @@ func returnToMenu():
 #==========================
 # EVENTS
 #==========================
+
+func onOptionsMenuBack():
+	isVisible = togglePauseMenu(true)
+
+#func _on_main_menu_btn_button_down() -> void:
+	#print_debug("main menu")
+	#returnToMenu()
+#
+#
+#func _on_options_btn_button_down() -> void:
+	#print_debug("options")
+	#changeSubMenu(options_menu)
+#
+#
+#func _on_resume_btn_button_down() -> void:
+	#print_debug("resume")
+	#resumeGame()
+
 
 func _on_main_menu_btn_button_down() -> void:
 	returnToMenu()

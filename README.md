@@ -7,7 +7,7 @@ It includes a deckbulindg mode where you can use abilities at your advantage
 
 This project was born as a part of the 20 games challenge. My objective is to build small games with a limited scope so i can get experience and face diverse obstacles at a fast pace. As a way to also improve as a designer, each game must include a unique twist not present in its original counterpart.
 
-In this case i got inspired by the spanish game Friends vs Friends, a really original take on the classic arena shooter where you must first build a deck that will hold special abilities that will be randomly given to you each round. 
+In this case i got inspired by the spanish game Friends vs Friends, a really original take on the classic arena shooter where you must first build a deck that will hold special abilities that will be randomly given to you each round.
 
 Therefore, aside from the basic pong, my game will also include a deck mode where each player will build its own set of abilities to make things more interesting.
 The project must be heavily typed to encourage good coding practices and should also be an example of good architectural choices
@@ -42,6 +42,9 @@ The project must be heavily typed to encourage good coding practices and should 
     - [ ] Control inversion
     - [ ] Blind deck
     - [ ] 2x score
+
+## Optional todos
+
 - [ ] Player customization
   - [ ] Player skins
   - [ ] Goal animations

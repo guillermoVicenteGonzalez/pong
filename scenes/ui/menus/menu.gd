@@ -14,9 +14,11 @@ func goToScene(scene:String):
 		
 func goToPackedScene(scene:PackedScene):
 	if scene != null:
+		Engine.time_scale = 1
+		LevelTransitions.fadeToBlack()
 		await LevelTransitions.fadeToBlack()
+		get_tree().change_scene_to_packed(scene)
 		get_tree().paused= false
-		var err = get_tree().change_scene_to_packed(scene)
 		await LevelTransitions.fadeFromBlack()
 	else:
 		print_debug("parameter scene is null")
@@ -31,7 +33,6 @@ func togglePause(flag:bool)->bool:
 	return get_tree().paused
 
 func toggleVisible(flag:bool)->bool:
-	print(flag)
 #await for animation
 	if flag == null:
 		if visible:

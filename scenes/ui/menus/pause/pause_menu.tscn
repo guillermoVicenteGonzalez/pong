@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://baf8d2h5omqhv"]
+[gd_scene load_steps=5 format=3 uid="uid://baf8d2h5omqhv"]
 
 [ext_resource type="Script" path="res://scenes/ui/menus/pause/pause_menu.gd" id="1_0ew8y"]
 [ext_resource type="Theme" uid="uid://b2pndf3ulfxwh" path="res://scenes/ui/themes/default.tres" id="1_goonj"]
 [ext_resource type="PackedScene" uid="uid://cemlxawo886ih" path="res://scenes/ui/menus/options/options_menu.tscn" id="3_8wcce"]
+[ext_resource type="PackedScene" uid="uid://cfvsp32vy3ebf" path="res://scenes/ui/menus/main_menu.tscn" id="3_bdrd7"]
 
 [node name="pauseMenuParent" type="Control"]
 process_mode = 3
@@ -23,6 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0ew8y")
+mainMenu = ExtResource("3_bdrd7")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="pauseMenuContainer"]
 layout_mode = 2
@@ -42,6 +44,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="resumeBtn" type="Button" parent="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -49,6 +52,7 @@ size_flags_vertical = 4
 text = "RESUME"
 
 [node name="optionsBtn" type="Button" parent="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -56,6 +60,7 @@ size_flags_vertical = 4
 text = "OPTIONS"
 
 [node name="mainMenuBtn" type="Button" parent="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -67,6 +72,6 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="button_down" from="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer/resumeBtn" to="." method="_on_resume_btn_button_down"]
-[connection signal="button_down" from="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer/optionsBtn" to="." method="_on_options_btn_button_down"]
-[connection signal="button_down" from="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer/mainMenuBtn" to="." method="_on_main_menu_btn_button_down"]
+[connection signal="button_down" from="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer/resumeBtn" to="pauseMenuContainer" method="_on_resume_btn_button_down"]
+[connection signal="button_down" from="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer/optionsBtn" to="pauseMenuContainer" method="_on_options_btn_button_down"]
+[connection signal="button_down" from="pauseMenuContainer/VSplitContainer/MarginContainer/VBoxContainer/mainMenuBtn" to="pauseMenuContainer" method="_on_main_menu_btn_button_down"]
