@@ -4,13 +4,13 @@
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
 [ext_resource type="PackedScene" uid="uid://645o0nlmtucu" path="res://scenes/level_elements/walls/wall.tscn" id="2_6wun7"]
 [ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
+[ext_resource type="PackedScene" uid="uid://baf8d2h5omqhv" path="res://scenes/ui/menus/pause/pause_menu.tscn" id="4_wjiee"]
 [ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
 [ext_resource type="PackedScene" uid="uid://b2uodpgrbkq7t" path="res://scenes/player/enemyPlayer/enemy_player.tscn" id="6_0inc0"]
 [ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_wupvv"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_o4nxp"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_ufa7l"]
-[ext_resource type="PackedScene" uid="uid://baf8d2h5omqhv" path="res://scenes/ui/menus/pause/pause_menu.tscn" id="11_em7br"]
 
 [sub_resource type="Resource" id="Resource_b3tta"]
 script = ExtResource("2_dsfjs")
@@ -29,18 +29,18 @@ process_mode = 3
 script = ExtResource("1_y6tow")
 player1_goal = NodePath("stage/playerGoal")
 player2_goal = NodePath("stage/enemyGoal")
-score_hud = NodePath("UI-CONTAINER/templateScoreHud")
+score_hud = NodePath("UI2/templateScoreHud")
 wall_resource = ExtResource("2_6wun7")
 mainCamera = NodePath("mainCamera")
 speed = 3.98
 winCondition = 3
 size = 1000
 
-[node name="UI-CONTAINER" type="CanvasLayer" parent="."]
+[node name="UI2" type="CanvasLayer" parent="."]
 
-[node name="templateScoreHud" parent="UI-CONTAINER" instance=ExtResource("6_vnie8")]
+[node name="templateScoreHud" parent="UI2" instance=ExtResource("6_vnie8")]
 
-[node name="pauseMenu" parent="UI-CONTAINER" instance=ExtResource("11_em7br")]
+[node name="pauseMenuParent" parent="UI2" instance=ExtResource("4_wjiee")]
 
 [node name="stage" type="Node2D" parent="."]
 
@@ -72,6 +72,6 @@ zoom = Vector2(0.8, 0.8)
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("8_wupvv")
 
-[editable path="UI-CONTAINER/pauseMenu"]
+[editable path="UI2/pauseMenuParent"]
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]
