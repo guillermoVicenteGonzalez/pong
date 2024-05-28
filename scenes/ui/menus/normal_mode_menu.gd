@@ -46,7 +46,9 @@ func playGame():
 	LevelTransitions.fadeFromBlack()
 	get_tree().root.add_child(levelInstance)
 	get_tree().paused = false
-	queue_free()
+	var mainMenu = get_parent()
+	mainMenu.queue_free()
+	#queue_free()
 
 
 func _on_play_btn_button_down() -> void:

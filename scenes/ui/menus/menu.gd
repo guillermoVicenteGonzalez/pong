@@ -4,6 +4,32 @@ extends Control
 
 signal back
 
+
+
+func changeSceneToPacked(nScene:PackedScene):
+	get_tree().pause = true
+	Engine.time_scale = 0
+	var instance = nScene.instantiate()
+	await LevelTransitions.fadeToBlack()
+	await get_tree().create_timer(.5).timeout
+	get_tree().root.add_child(instance)
+	await LevelTransitions.fadeFromBlack()
+	get_tree().pause = false
+	Engine.time_scale = 1
+	queue_free()
+	
+func changeScene(nScene:String):
+	get_tree().pause = true
+	Engine.time_scale = 0
+	var scene:PackedScene = load(nScene)
+	await LevelTransitions.fadeToBlack()
+	var instance = scene.instantiate()
+	get_tree().root.add_child(instance)
+	await LevelTransitions.fadeFromBlack()
+	get_tree().paused = false
+	Engine.time_scale = 1
+	queue_free()
+
 func goToScene(scene:String):
 	if scene != null:
 		await LevelTransitions.fadeToBlack()
