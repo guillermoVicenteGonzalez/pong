@@ -3,6 +3,8 @@ class_name template_level
 extends Node2D
 
 @onready var ballScene = preload("res://scenes/level_elements/ball/ball.tscn")
+@onready var level_anim_player: AnimationPlayer = %levelAnimPlayer
+
 
 @export_category("Goals")
 @export var player1_goal:Goal
@@ -53,18 +55,10 @@ func _ready()->void:
 	player1_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,2)
-			if player2_score == winCondition:
-				gameOver(2)
-			else:
-				resetLevel(body,-1,stage_center)
 	)
 	player2_goal.body_entered.connect(
 		func(body:Node):
 			scoreGoal(body,1)
-			if player1_score == winCondition:
-				gameOver(1)
-			else:
-				resetLevel(body,1,stage_center)
 	)
 	#ball = createBall(stage_center)
 	#ball.startBall(false)
@@ -87,6 +81,7 @@ func setupDimensions(size:int)->int:
 	elif size >= 2000:
 		return 2000
 	return size
+	
 func generateStage(sizeX:int, sizeY:int)->void:
 	var screenCenter = Vector2(sizeX/2, sizeY/2)
 	var wallMargin = 100
@@ -118,14 +113,27 @@ func generateStage(sizeX:int, sizeY:int)->void:
 #========================================
 
 func scoreGoal(body:Node, flag:int):
+	var score:int
+	level_anim_player.play("goalBounce")
+	await level_anim_player.animation_finished
 	if flag == 2:
 		player2_score +=1
+		score = player2_score
 		score_hud.setPlayerScore(player2_score,2)
 	elif flag == 1:
 		player1_score +=1
+		score = player1_score
 		score_hud.setPlayerScore(player1_score,1)
+		
+	if score == winCondition:
+		gameOver(flag)
+	else:
+		resetLevel(body,1,stage_center)
+		
+	
 
 func resetLevel(ball:Ball, direction:int, start_pos:Vector2)->void:
+	get_tree().paused = true
 	if ball != null:
 		await ball.destroyBall() #we wait until the ball has exited the tree so that we can use the same name
 	initializePlayersPos(players, HSize, VSize) 
@@ -153,6 +161,7 @@ func gameOver(playerIndex:int):
 	get_tree().paused = true
 	score_hud.setMessage("player " + str(playerIndex) + " wins!!")
 	score_hud.toggleMessage(true)
+	#game over menu
 
 func calculateZoom(size:float)->float:
 	var decrement = (size - 600)/100
@@ -160,6 +169,10 @@ func calculateZoom(size:float)->float:
 	const baseZoom = 0.75
 	
 	return baseZoom - rate * decrement
+
+#========================================
+# Utility
+#========================================
 
 #========================================
 # GETTERS AND SETTERS
