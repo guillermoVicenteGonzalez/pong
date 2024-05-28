@@ -31,7 +31,9 @@ func resumeGame():
 	
 func returnToMenu():
 	#print_debug(MainMenu)
-	goToPackedScene(MAIN_MENU)
+	Engine.time_scale = 1
+	changeSceneToPacked(MAIN_MENU)
+	get_tree().paused = false
 
 	
 

@@ -6,25 +6,21 @@ signal back
 
 
 
-func changeSceneToPacked(nScene:PackedScene):
-	get_tree().pause = true
-	Engine.time_scale = 0
-	var instance = nScene.instantiate()
+func changeSceneToPacked(nScene:PackedScene, currentLevel:Node2D=null):
+	get_tree().paused = true
 	await LevelTransitions.fadeToBlack()
-	await get_tree().create_timer(.5).timeout
-	get_tree().root.add_child(instance)
+	await Scene_Switcher.changeSceneToPacked(nScene,currentLevel)
+	#await get_tree().create_timer(.5).timeout
 	await LevelTransitions.fadeFromBlack()
-	get_tree().pause = false
-	Engine.time_scale = 1
+	get_tree().paused = false
+	#Engine.time_scale = 1
 	queue_free()
 	
-func changeScene(nScene:String):
-	get_tree().pause = true
+func changeScene(nScene:String, currentLevel:Node2D=null):
+	get_tree().paused = true
 	Engine.time_scale = 0
-	var scene:PackedScene = load(nScene)
 	await LevelTransitions.fadeToBlack()
-	var instance = scene.instantiate()
-	get_tree().root.add_child(instance)
+	await Scene_Switcher.changeScene(nScene,currentLevel)
 	await LevelTransitions.fadeFromBlack()
 	get_tree().paused = false
 	Engine.time_scale = 1
@@ -58,7 +54,7 @@ func togglePause(flag:bool)->bool:
 		toggleVisible(flag)
 	return get_tree().paused
 
-func toggleVisible(flag:bool)->bool:
+func toggleVisible(flag:bool=false)->bool:
 #await for animation
 	if flag == null:
 		if visible:

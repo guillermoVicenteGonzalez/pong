@@ -32,25 +32,34 @@ func _ready():
 		level_size = size_slider.value
 	)
 
+#func playGame():
+	#print(diff)
+	#print(level_size)
+	#print(speed)
+	#var levelInstance:template_level  = levelFile.instantiate()
+	#await LevelTransitions.fadeToBlack()
+	#toggleVisible(false)
+	#levelInstance.setDiff(diff)
+	#levelInstance.setSize(level_size)
+	#levelInstance.setSpeed(speed)
+	#await get_tree().create_timer(.5).timeout
+	#LevelTransitions.fadeFromBlack()
+	#get_tree().root.add_child(levelInstance)
+	#get_tree().paused = false
+	#var mainMenu = get_parent()
+	#mainMenu.queue_free()
+	##queue_free()
+
 func playGame():
-	print(diff)
-	print(level_size)
-	print(speed)
-	var levelInstance:template_level  = levelFile.instantiate()
+	var levelInstance:template_level = levelFile.instantiate()
 	await LevelTransitions.fadeToBlack()
-	toggleVisible(false)
 	levelInstance.setDiff(diff)
 	levelInstance.setSize(level_size)
 	levelInstance.setSpeed(speed)
-	await get_tree().create_timer(.5).timeout
-	LevelTransitions.fadeFromBlack()
-	get_tree().root.add_child(levelInstance)
-	get_tree().paused = false
-	var mainMenu = get_parent()
-	mainMenu.queue_free()
-	#queue_free()
-
-
+	Scene_Switcher.changeSceneToInstance(levelInstance)
+	await LevelTransitions.fadeFromBlack()
+	
+	
 func _on_play_btn_button_down() -> void:
 	playGame()
 
