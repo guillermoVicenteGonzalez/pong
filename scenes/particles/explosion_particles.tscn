@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpc71sqsenhwl"]
+
+[ext_resource type="Script" path="res://scenes/particles/explosion_particles.gd" id="1_0321n"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u1ug7"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 90.0
+initial_velocity_min = 80.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 1.0
+linear_accel_max = 1.0
+scale_min = 2.0
+scale_max = 10.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[node name="explosionParticles" type="GPUParticles2D"]
+process_mode = 3
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_u1ug7")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+collision_base_size = 8.11
+script = ExtResource("1_0321n")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=17 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
 [ext_resource type="PackedScene" uid="uid://645o0nlmtucu" path="res://scenes/level_elements/walls/wall.tscn" id="2_6wun7"]
 [ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
+[ext_resource type="PackedScene" uid="uid://baf8d2h5omqhv" path="res://scenes/ui/menus/pause/pause_menu.tscn" id="4_8ess8"]
 [ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
 [ext_resource type="PackedScene" uid="uid://b2uodpgrbkq7t" path="res://scenes/player/enemyPlayer/enemy_player.tscn" id="6_0inc0"]
 [ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
@@ -76,6 +77,9 @@ size = 1000
 [node name="UI2" type="CanvasLayer" parent="."]
 
 [node name="templateScoreHud" parent="UI2" instance=ExtResource("6_vnie8")]
+
+[node name="pauseMenuParent" parent="UI2" instance=ExtResource("4_8ess8")]
+visible = true
 
 [node name="stage" type="Node2D" parent="."]
 

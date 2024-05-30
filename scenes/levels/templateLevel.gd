@@ -48,20 +48,19 @@ func _ready()->void:
 	VSize = size / 2
 	stage_center = Vector2(HSize/2, VSize /2)
 	generateStage(HSize, VSize)
-	resetLevel(ball, 1, stage_center)
+	resetLevel( 1, stage_center)
 	initializePlayersPos(players, HSize, VSize)
 	print_debug(speed)
+	player1_goal.scored.connect(
+		func():
+			scoreGoal(2)
+	)
 	
-	player1_goal.body_entered.connect(
-		func(body:Node):
-			scoreGoal(body,2)
+	player2_goal.scored.connect(
+		func():
+			scoreGoal(1)
 	)
-	player2_goal.body_entered.connect(
-		func(body:Node):
-			scoreGoal(body,1)
-	)
-	#ball = createBall(stage_center)
-	#ball.startBall(false)
+
 
 #========================================
 # LEVEL SETUP
@@ -112,7 +111,7 @@ func generateStage(sizeX:int, sizeY:int)->void:
 # FUNCTIONALITY
 #========================================
 
-func scoreGoal(body:Node, flag:int):
+func scoreGoal(flag:int):
 	var score:int
 	level_anim_player.play("goalBounce")
 	await level_anim_player.animation_finished
@@ -128,17 +127,15 @@ func scoreGoal(body:Node, flag:int):
 	if score == winCondition:
 		gameOver(flag)
 	else:
-		resetLevel(body,1,stage_center)
+		resetLevel(1,stage_center)
 		
 	
 
-func resetLevel(ball:Ball, direction:int, start_pos:Vector2)->void:
+func resetLevel(direction:int, start_pos:Vector2)->void:
 	get_tree().paused = true
-	if ball != null:
-		await ball.destroyBall() #we wait until the ball has exited the tree so that we can use the same name
 	initializePlayersPos(players, HSize, VSize) 
 	get_tree().paused = true
-	ball = createBall(start_pos)
+	var ball = createBall(start_pos)
 	var timer:Timer = Timer.new()
 	add_child(timer)
 	score_hud.toggleMessage(true)
