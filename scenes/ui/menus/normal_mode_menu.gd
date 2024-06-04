@@ -7,10 +7,10 @@ extends Menu
 @onready var size_slider: HSlider = %sizeSlider
 @onready var max_goals_input: SpinBox = %maxGoals
 
-var diff:int
+var diff:int 
 var speed:int
-var level_size:int
-var maxGoals:int=1
+var level_size:int 
+var maxGoals:int
 
 var levelScene:PackedScene
 
@@ -20,6 +20,7 @@ func _ready():
 	diff = diff_slider.value
 	speed = speed_slider.value
 	level_size = size_slider.value
+	maxGoals = max_goals_input.value
 	
 	max_goals_input.value_changed.connect(func(value_changed:float):
 		maxGoals = max_goals_input.value
@@ -37,23 +38,7 @@ func _ready():
 		level_size = size_slider.value
 	)
 
-#func playGame():
-	#print(diff)
-	#print(level_size)
-	#print(speed)
-	#var levelInstance:template_level  = levelFile.instantiate()
-	#await LevelTransitions.fadeToBlack()
-	#toggleVisible(false)
-	#levelInstance.setDiff(diff)
-	#levelInstance.setSize(level_size)
-	#levelInstance.setSpeed(speed)
-	#await get_tree().create_timer(.5).timeout
-	#LevelTransitions.fadeFromBlack()
-	#get_tree().root.add_child(levelInstance)
-	#get_tree().paused = false
-	#var mainMenu = get_parent()
-	#mainMenu.queue_free()
-	##queue_free()
+
 
 func playGame():
 	var levelInstance:template_level = levelFile.instantiate()

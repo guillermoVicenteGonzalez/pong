@@ -5,6 +5,8 @@ extends GPUParticles2D
 signal effect_finished
 
 @export var direction:Vector2
+@export var color1:Color
+@export var color2:Color
 
 func setDirection(dir:Vector2):
 	pass

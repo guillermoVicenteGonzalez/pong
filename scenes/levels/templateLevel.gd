@@ -37,6 +37,8 @@ var stage_center:Vector2
 var HSize:float
 var VSize:float
 
+const goal_timeout=2
+
 #========================================
 # LIFECYCLE
 #========================================
@@ -125,6 +127,7 @@ func scoreGoal(flag:int):
 		score = player1_score
 		score_hud.setPlayerScore(player1_score,1)
 		
+	await get_tree().create_timer(goal_timeout).timeout
 	if score == winCondition:
 		gameOver(flag)
 	else:
