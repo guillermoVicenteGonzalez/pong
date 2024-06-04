@@ -5,10 +5,12 @@ extends Menu
 @onready var diff_slider: HSlider = %diffSlider
 @onready var speed_slider: HSlider = %speedSlider
 @onready var size_slider: HSlider = %sizeSlider
+@onready var max_goals_input: SpinBox = %maxGoals
 
 var diff:int
 var speed:int
 var level_size:int
+var maxGoals:int=1
 
 var levelScene:PackedScene
 
@@ -19,8 +21,11 @@ func _ready():
 	speed = speed_slider.value
 	level_size = size_slider.value
 	
+	max_goals_input.value_changed.connect(func(value_changed:float):
+		maxGoals = max_goals_input.value
+	)
+	
 	diff_slider.drag_ended.connect(func(value_changed:bool):
-		print("im chaning. My current value is: " + str(diff_slider.value))
 		diff = diff_slider.value
 	)
 	
@@ -56,6 +61,7 @@ func playGame():
 	levelInstance.setDiff(diff)
 	levelInstance.setSize(level_size)
 	levelInstance.setSpeed(speed)
+	levelInstance.setMaxGoals(maxGoals)
 	Scene_Switcher.changeSceneToInstance(levelInstance)
 	await LevelTransitions.fadeFromBlack()
 	

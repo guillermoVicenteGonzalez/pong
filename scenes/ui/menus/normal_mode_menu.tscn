@@ -50,7 +50,8 @@ unique_name_in_owner = true
 layout_mode = 2
 max_value = 10.0
 value = 1.0
-tick_count = 10
+scrollable = false
+tick_count = 11
 
 [node name="speedLabel" type="Label" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -76,7 +77,7 @@ min_value = 600.0
 max_value = 1200.0
 step = 100.0
 value = 600.0
-tick_count = 6
+tick_count = 7
 ticks_on_borders = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
@@ -90,11 +91,13 @@ layout_mode = 2
 text = "Win condition goals
 "
 
-[node name="TextEdit" type="LineEdit" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="maxGoals" type="SpinBox" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "10
-"
+min_value = 1.0
+max_value = 20.0
+value = 1.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VSplitContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

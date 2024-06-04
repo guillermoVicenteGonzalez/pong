@@ -4,6 +4,7 @@ extends Node2D
 
 @onready var ballScene = preload("res://scenes/level_elements/ball/ball.tscn")
 @onready var level_anim_player: AnimationPlayer = %levelAnimPlayer
+@onready var enemy_player:  = $enemyPlayer
 
 
 @export_category("Goals")
@@ -46,11 +47,11 @@ func _ready()->void:
 	size = setupDimensions(size)
 	HSize = size
 	VSize = size / 2
+	enemy_player.setDifficulty(difficulty)
 	stage_center = Vector2(HSize/2, VSize /2)
 	generateStage(HSize, VSize)
 	resetLevel( 1, stage_center)
 	initializePlayersPos(players, HSize, VSize)
-	print_debug(speed)
 	player1_goal.scored.connect(
 		func():
 			scoreGoal(2)
@@ -68,7 +69,7 @@ func _ready()->void:
 
 func createBall(position:Vector2)->Ball:
 	var b = ballScene.instantiate()
-	b.setSpeed(300 * speed)
+	b.setSpeed(200 * speed)
 	add_child(b)
 	b.name="ball"
 	b.global_position = position
@@ -180,13 +181,18 @@ func setDiff(nDif:int)->void:
 	if nDif > 10:
 		difficulty = 10
 	elif nDif < 10:
-		difficulty = 0
+		difficulty = nDif
+
+
 		
 func setSize(nSize:int)->void:
 	size = nSize
 	
 func setSpeed(nSpeed:int)->void:
 	speed = nSpeed
+	
+func setMaxGoals(nGoals:int)->void:
+	winCondition = nGoals
 	
 #========================================
 # DEBUG
