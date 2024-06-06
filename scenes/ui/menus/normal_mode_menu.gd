@@ -16,7 +16,6 @@ var levelScene:PackedScene
 
 
 func _ready():
-	#levelScene = load(levelFile)
 	diff = diff_slider.value
 	speed = speed_slider.value
 	level_size = size_slider.value

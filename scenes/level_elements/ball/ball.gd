@@ -36,7 +36,6 @@ func destroyBall():
 	var particles:ExplosionEffect = explosion.instantiate()
 	particles.position = global_position
 	if direction == 1:
-		print_debug("adversary: " + str(particles.rotation))
 		particles.rotation_degrees = 180
 	#particles.rotation = global_rotation
 	get_tree().root.add_child(particles)
