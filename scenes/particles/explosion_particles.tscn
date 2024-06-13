@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dpc71sqsenhwl"]
 
-[ext_resource type="Script" path="res://scenes/particles/explosion_particles.gd" id="1_0321n"]
+[ext_resource type="Script" path="res://scenes/particles/particleEffect.gd" id="1_o58ya"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u1ug7"]
 particle_flag_disable_z = true
@@ -27,4 +27,5 @@ process_material = SubResource("ParticleProcessMaterial_u1ug7")
 one_shot = true
 explosiveness = 1.0
 collision_base_size = 8.11
-script = ExtResource("1_0321n")
+script = ExtResource("1_o58ya")
+dies = true

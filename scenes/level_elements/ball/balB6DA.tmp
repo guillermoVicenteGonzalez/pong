@@ -20,6 +20,9 @@ contact_monitor = true
 script = ExtResource("1_fq74h")
 explosion = ExtResource("2_p0ogj")
 hit_effect = ExtResource("3_pjt4l")
+radius = null
+speed = null
+color = null
 
 [node name="ballCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true

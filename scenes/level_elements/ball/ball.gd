@@ -3,6 +3,7 @@ class_name Ball
 extends RigidBody2D
 
 @export var explosion:PackedScene
+@export var hit_effect:PackedScene
 
 @export var radius:int = 10
 @export var speed:int = 300
@@ -33,13 +34,11 @@ func resetBall(position:Vector2)->void:
 	
 func destroyBall():
 #animacion	
-	var particles:ExplosionEffect = explosion.instantiate()
-	particles.position = global_position
+	var particles:ParticleEffect = explosion.instantiate()
+	particles.instantiateParticles(global_position, get_tree().root)
 	if direction == 1:
 		particles.rotation_degrees = 180
 	#particles.rotation = global_rotation
-	get_tree().root.add_child(particles)
-	particles.play()
 	direction = 0
 	linear_velocity.x = 0
 	queue_free()
@@ -54,8 +53,11 @@ func startBall(dir:int):
 	else:
 		direction = -1
 
+
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("players"):
+		var particles:ParticleEffect = await hit_effect.instantiate()
+		particles.instantiateParticles(global_position, get_tree().root)
 		direction *=-1
 	pass # Replace with function body.
 

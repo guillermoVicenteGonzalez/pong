@@ -1,4 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://d5ci736u0rl"]
+[gd_scene load_steps=7 format=3 uid="uid://d5ci736u0rl"]
+
+[ext_resource type="Script" path="res://scenes/particles/particleEffect.gd" id="1_2rtch"]
 
 [sub_resource type="Gradient" id="Gradient_0ma22"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -40,3 +42,5 @@ color_ramp = SubResource("GradientTexture1D_u0crb")
 amount = 16
 process_material = SubResource("ParticleProcessMaterial_bhgik")
 explosiveness = 1.0
+script = ExtResource("1_2rtch")
+dies = true
