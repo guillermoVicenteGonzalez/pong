@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcjoqak2adlkg"]
+[gd_scene load_steps=4 format=3 uid="uid://bcjoqak2adlkg"]
 
 [ext_resource type="Script" path="res://scenes/level_elements/goal.gd" id="1_fvqd3"]
+[ext_resource type="AudioStream" uid="uid://cxu1anrr8wbfk" path="res://sounds/ballHits/Goal.wav" id="2_ucogi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2padp"]
 
@@ -12,5 +13,9 @@ script = ExtResource("1_fvqd3")
 [node name="shape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_2padp")
+
+[node name="explosionSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_ucogi")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

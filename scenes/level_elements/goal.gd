@@ -5,6 +5,7 @@ extends Area2D
 signal scored
 
 @onready var shape: CollisionShape2D = %shape
+@onready var explosion_sound: AudioStreamPlayer = %explosionSound
 
 func setSize(height:int)->void:
 	shape.shape.size.y = height
@@ -14,6 +15,7 @@ func setPosition(pos:Vector2)->void:
 
 
 func onBallEnter(ball:Ball):
+	explosion_sound.play()
 	ball.destroyBall()
 	scored.emit()
 	pass
