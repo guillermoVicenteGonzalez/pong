@@ -35,11 +35,11 @@ linear_accel_max = -72.34
 linear_accel_curve = SubResource("CurveTexture_kdd1d")
 radial_accel_min = 95.75
 radial_accel_max = 95.75
-scale_max = 10.0
+scale_min = 0.5
+scale_max = 8.0
 color_ramp = SubResource("GradientTexture1D_u0crb")
 
 [node name="GPUParticles2D" type="GPUParticles2D"]
-amount = 16
 process_material = SubResource("ParticleProcessMaterial_bhgik")
 explosiveness = 1.0
 script = ExtResource("1_2rtch")

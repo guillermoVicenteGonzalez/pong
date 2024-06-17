@@ -1,66 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=13 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
 [ext_resource type="PackedScene" uid="uid://645o0nlmtucu" path="res://scenes/level_elements/walls/wall.tscn" id="2_6wun7"]
 [ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
+[ext_resource type="Script" path="res://scenes/level_elements/camera/gameCamera.gd" id="3_ooibm"]
+[ext_resource type="PackedScene" uid="uid://ob0rvphk33ka" path="res://scenes/level_elements/camera/game_camera.tscn" id="3_tmwou"]
 [ext_resource type="PackedScene" uid="uid://baf8d2h5omqhv" path="res://scenes/ui/menus/pause/pause_menu.tscn" id="4_8ess8"]
 [ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
 [ext_resource type="PackedScene" uid="uid://b2uodpgrbkq7t" path="res://scenes/player/enemyPlayer/enemy_player.tscn" id="6_0inc0"]
 [ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_wupvv"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_o4nxp"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_ufa7l"]
 
 [sub_resource type="Resource" id="Resource_b3tta"]
 script = ExtResource("2_dsfjs")
 speed = 300
 length = 0
 acc = 200
-
-[sub_resource type="Resource" id="Resource_rn1tq"]
-script = ExtResource("10_ufa7l")
-duration = 1.0
-transition = 0
-ease = 2
-
-[sub_resource type="Animation" id="Animation_deylm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_d4qe2"]
-resource_name = "goalBounce"
-length = 0.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.3, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1.68179),
-"update": 0,
-"values": [Vector2(0, -20), Vector2(0, 20), Vector2(0, -10), Vector2(0, 10), Vector2(0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_hdcdb"]
-_data = {
-"RESET": SubResource("Animation_deylm"),
-"goalBounce": SubResource("Animation_d4qe2")
-}
 
 [node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "mainCamera")]
 process_mode = 3
@@ -69,10 +25,11 @@ player1_goal = NodePath("stage/playerGoal")
 player2_goal = NodePath("stage/enemyGoal")
 score_hud = NodePath("UI2/templateScoreHud")
 wall_resource = ExtResource("2_6wun7")
-mainCamera = NodePath("mainCamera")
-speed = 3.98
+mainCamera = NodePath("gameCamera")
 winCondition = 3
 size = 1000
+
+[node name="gameCamera" parent="." instance=ExtResource("3_tmwou")]
 
 [node name="UI2" type="CanvasLayer" parent="."]
 
@@ -99,24 +56,13 @@ player_res = SubResource("Resource_b3tta")
 position = Vector2(624, 168)
 difficulty = 10.0
 
-[node name="mainCamera" type="Node2D" parent="."]
-position = Vector2(0, -4.76837e-07)
-script = ExtResource("9_o4nxp")
-zoom = Vector2(0.8, 0.8)
-tween_resource = SubResource("Resource_rn1tq")
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -4.76837e-07)
-zoom = Vector2(0.8, 0.8)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("8_wupvv")
 
-[node name="levelAnimPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_hdcdb")
-}
+[node name="GameCamera" type="Node2D" parent="."]
+script = ExtResource("3_ooibm")
 
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]

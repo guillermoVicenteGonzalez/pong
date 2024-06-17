@@ -24,8 +24,10 @@ func play():
 	if dies:
 		queue_free()
 
-func instantiateParticles(position:Vector2, parent:Node):
+func instantiateParticles(position:Vector2, parent:Node, direction:int=0):
 	global_position = position
-	print_debug(self)
+	if direction == 1:
+		self.rotation_degrees = 180
+
 	parent.add_child(self)
 	self.play()

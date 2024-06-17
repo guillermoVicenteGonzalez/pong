@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cn284xgpuyx6a"]
+
+[ext_resource type="Script" path="res://scenes/level_elements/ball/ball.gd" id="1_fq74h"]
+[ext_resource type="PackedScene" uid="uid://dpc71sqsenhwl" path="res://scenes/particles/explosion_particles.tscn" id="2_p0ogj"]
+[ext_resource type="PackedScene" uid="uid://d5ci736u0rl" path="res://scenes/particles/collisionParticles.tscn" id="3_pjt4l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_u7ix0"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w0rpt"]
+
+[node name="ball" type="RigidBody2D" groups=["ball"]]
+position = Vector2(232, 136)
+collision_layer = 2
+collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_u7ix0")
+gravity_scale = 0.0
+max_contacts_reported = 2
+contact_monitor = true
+script = ExtResource("1_fq74h")
+explosion = ExtResource("2_p0ogj")
+hit_effect = ExtResource("3_pjt4l")
+
+[node name="ballCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_w0rpt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

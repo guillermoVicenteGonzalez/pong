@@ -57,7 +57,8 @@ func startBall(dir:int):
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("players"):
 		var particles:ParticleEffect = await hit_effect.instantiate()
-		particles.instantiateParticles(global_position, get_tree().root)
+		#var instancePos:Vector2 = global_position + Vector2(radius,0)
+		particles.instantiateParticles(global_position + Vector2(radius * direction,0), get_tree().root,direction)
 		direction *=-1
 	pass # Replace with function body.
 

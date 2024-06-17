@@ -3,7 +3,6 @@ class_name template_level
 extends Node2D
 
 @onready var ballScene = preload("res://scenes/level_elements/ball/ball.tscn")
-@onready var level_anim_player: AnimationPlayer = %levelAnimPlayer
 @onready var enemy_player:  = $enemyPlayer
 
 
@@ -18,11 +17,12 @@ extends Node2D
 @export var wall_resource:PackedScene
 
 @export_group("Camera")
-@export var mainCamera:PhantomCamera2D
+#@export var mainCamera:PhantomCamera2D
+@export var mainCamera:GameCamera
 
 @export_group("level settings")
-@export_range(1,10) var difficulty
-@export_range(1,10) var speed
+@export_range(1,10) var difficulty = 1
+@export_range(1,10) var speed = 1
 @export var winCondition:int = 10
 @export var size: int = 10
 @export var stageColor:Color
@@ -107,8 +107,8 @@ func generateStage(sizeX:int, sizeY:int)->void:
 	var z:float = calculateZoom(sizeX)
 	print_debug("zoom: " + str(z))
 	var zoom = Vector2(z,z)
-	mainCamera.zoom = zoom
-	mainCamera.position = screenCenter
+	mainCamera.setZoom(zoom)
+	mainCamera.setPosition(screenCenter)
 
 #========================================
 # FUNCTIONALITY
@@ -116,8 +116,7 @@ func generateStage(sizeX:int, sizeY:int)->void:
 
 func scoreGoal(flag:int):
 	var score:int
-	level_anim_player.play("goalBounce")
-	await level_anim_player.animation_finished
+	await mainCamera.shake(5)
 	if flag == 2:
 		player2_score +=1
 		score = player2_score
