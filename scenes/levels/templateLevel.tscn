@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=14 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
@@ -17,6 +17,17 @@ script = ExtResource("2_dsfjs")
 speed = 300
 length = 0
 acc = 200
+
+[sub_resource type="Environment" id="Environment_5rean"]
+background_mode = 3
+tonemap_mode = 2
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 1.0
+glow_levels/4 = 1.0
+glow_levels/6 = 1.0
+glow_levels/7 = 1.0
+glow_blend_mode = 1
 
 [node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "mainCamera")]
 process_mode = 3
@@ -63,6 +74,9 @@ script = ExtResource("8_wupvv")
 
 [node name="GameCamera" type="Node2D" parent="."]
 script = ExtResource("3_ooibm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5rean")
 
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]

@@ -1,31 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpc71sqsenhwl"]
+[gd_scene load_steps=11 format=3 uid="uid://dpc71sqsenhwl"]
 
 [ext_resource type="Script" path="res://scenes/particles/particleEffect.gd" id="1_o58ya"]
+
+[sub_resource type="Gradient" id="Gradient_62khp"]
+offsets = PackedFloat32Array(0, 0.716511, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.262745, 0.262745, 0.262745, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c1a78"]
+gradient = SubResource("Gradient_62khp")
+
+[sub_resource type="Curve" id="Curve_tawpb"]
+min_value = -1.0
+_data = [Vector2(0, -0.470325), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pioo1"]
+curve = SubResource("Curve_tawpb")
+
+[sub_resource type="Curve" id="Curve_md8h3"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0, 92.2732), 0.0, 0.0, 0, 0, Vector2(0.395415, -62.0381), -156.327, -156.327, 0, 0, Vector2(1, -76.5957), -903.222, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_w041v"]
+curve = SubResource("Curve_md8h3")
+
+[sub_resource type="Curve" id="Curve_7bdky"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.489971, 0.730683), 0.0, 0.0, 0, 0, Vector2(0.82235, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_onugk"]
+curve = SubResource("Curve_7bdky")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u1ug7"]
 particle_flag_disable_z = true
 emission_shape = 1
-emission_sphere_radius = 1.0
-angle_min = -23.0
-angle_max = 68.9
-spread = 90.0
-initial_velocity_min = 80.0
-initial_velocity_max = 300.0
+emission_sphere_radius = 0.01
+spread = 85.0
+initial_velocity_min = 50.0
+initial_velocity_max = 600.0
 gravity = Vector3(0, 0, 0)
-linear_accel_min = 1.0
-linear_accel_max = 1.0
-scale_max = 12.0
+linear_accel_max = 100.0
+linear_accel_curve = SubResource("CurveTexture_w041v")
+scale_min = 0.1
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_onugk")
+color_ramp = SubResource("GradientTexture1D_c1a78")
+hue_variation_min = -0.4
+hue_variation_max = 0.07
+hue_variation_curve = SubResource("CurveTexture_pioo1")
 collision_mode = 1
 collision_friction = 0.0
 collision_bounce = 1.0
 
 [node name="explosionParticles" type="GPUParticles2D"]
 process_mode = 3
-emitting = false
-amount = 64
+self_modulate = Color(30, 1, 1, 1)
+rotation = 0.000819354
+amount = 100
 process_material = SubResource("ParticleProcessMaterial_u1ug7")
-one_shot = true
+lifetime = 0.8
 explosiveness = 1.0
+randomness = 0.07
 collision_base_size = 8.11
+trail_lifetime = 1.0
 script = ExtResource("1_o58ya")
 dies = true

@@ -37,5 +37,6 @@ debug_color = Color(0.879316, 0.26793, 0.53597, 0.42)
 [node name="playerAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("2_21d1b")
+bus = &"Effects"
 
 [connection signal="body_entered" from="playerArea" to="." method="_on_player_area_body_entered"]
