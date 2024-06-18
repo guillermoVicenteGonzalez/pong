@@ -56,6 +56,7 @@ collision_bounce = 1.0
 
 [node name="explosionParticles" type="GPUParticles2D"]
 process_mode = 3
+modulate = Color(17.298, 1, 1, 1)
 self_modulate = Color(30, 1, 1, 1)
 rotation = 0.000819354
 amount = 100

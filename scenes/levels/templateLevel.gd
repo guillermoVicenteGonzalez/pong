@@ -165,8 +165,11 @@ func gameOver(playerIndex:int):
 
 func calculateZoom(size:float)->float:
 	var decrement = (size - 600)/100
-	const rate = 0.07
+	var rate = 0.07
 	const baseZoom = 0.75
+	
+	if size > 1300:
+		rate = 0.045
 	
 	return baseZoom - rate * decrement
 
