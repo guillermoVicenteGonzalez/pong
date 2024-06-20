@@ -81,3 +81,4 @@ layout_mode = 1
 [connection signal="button_down" from="MainMenuparent/VSplitContainer/VBoxContainer/optionsBtn" to="." method="_on_options_btn_button_down"]
 [connection signal="button_down" from="MainMenuparent/VSplitContainer/VBoxContainer/quitBtn" to="." method="_on_quit_btn_button_down"]
 [connection signal="back" from="optionsMenu" to="." method="_on_options_menu_back"]
+[connection signal="back" from="optionsMenu" to="." method="_on_options_menu_back"]

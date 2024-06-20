@@ -1,3 +1,5 @@
+class_name EnemyPlayer
+
 extends Player
 
 
@@ -65,4 +67,6 @@ func calculateSafeMargin(diff:int, size:float):
 
 func setDifficulty(diff:int):
 	difficulty = diff
+	safeRange =calculateSafeMargin(difficulty,player_body.size.y)
+	diffMarg = calculateDiffMargin(difficulty, maxDiff)
 	

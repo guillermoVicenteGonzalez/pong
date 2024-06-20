@@ -1,8 +1,7 @@
 extends Player
 
-@export var player_res:playerResource
-
 var direction:Vector2
+
 
 func _physics_process(delta: float) -> void:
 	direction.y = Input.get_axis("up","down")

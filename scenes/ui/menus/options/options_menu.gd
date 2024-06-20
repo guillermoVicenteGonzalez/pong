@@ -2,7 +2,6 @@ extends Menu
 
 @onready var back_btn: Button = %backBtn
 
-signal back
 
 func _ready() -> void:
 	back_btn.button_down.connect(backToMain)

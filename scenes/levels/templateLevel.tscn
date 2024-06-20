@@ -1,15 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=15 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
 [ext_resource type="PackedScene" uid="uid://645o0nlmtucu" path="res://scenes/level_elements/walls/wall.tscn" id="2_6wun7"]
 [ext_resource type="Script" path="res://scenes/player/playerResource.gd" id="2_dsfjs"]
+[ext_resource type="Script" path="res://scenes/level_elements/camera/gameCamera.gd" id="3_ooibm"]
+[ext_resource type="PackedScene" uid="uid://ob0rvphk33ka" path="res://scenes/level_elements/camera/game_camera.tscn" id="3_tmwou"]
+[ext_resource type="PackedScene" uid="uid://baf8d2h5omqhv" path="res://scenes/ui/menus/pause/pause_menu.tscn" id="4_8ess8"]
 [ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
 [ext_resource type="PackedScene" uid="uid://b2uodpgrbkq7t" path="res://scenes/player/enemyPlayer/enemy_player.tscn" id="6_0inc0"]
+[ext_resource type="PackedScene" uid="uid://bpyww1npfu0ei" path="res://scenes/ui/menus/retry/retry_menu.tscn" id="6_86vi0"]
 [ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_wupvv"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_o4nxp"]
-[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_ufa7l"]
 
 [sub_resource type="Resource" id="Resource_b3tta"]
 script = ExtResource("2_dsfjs")
@@ -17,27 +19,48 @@ speed = 300
 length = 0
 acc = 200
 
-[sub_resource type="Resource" id="Resource_rn1tq"]
-script = ExtResource("10_ufa7l")
-duration = 1.0
-transition = 0
-ease = 2
+[sub_resource type="Environment" id="Environment_5rean"]
+background_mode = 3
+tonemap_mode = 1
+tonemap_exposure = 7.28
+tonemap_white = 3.39
+glow_enabled = true
+glow_levels/1 = 1.0
+glow_levels/2 = 0.16
+glow_levels/3 = 0.32
+glow_levels/4 = 1.0
+glow_levels/6 = 1.0
+glow_levels/7 = 1.0
+glow_intensity = 3.67
+glow_strength = 0.08
+glow_bloom = 1.0
+glow_blend_mode = 1
+glow_hdr_threshold = 0.63
+glow_hdr_scale = 0.99
+glow_hdr_luminance_cap = 0.95
+fog_light_energy = 1.66
 
-[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "mainCamera")]
+[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "retry_menu", "mainCamera") groups=["Level"]]
 process_mode = 3
 script = ExtResource("1_y6tow")
 player1_goal = NodePath("stage/playerGoal")
 player2_goal = NodePath("stage/enemyGoal")
 score_hud = NodePath("UI2/templateScoreHud")
+retry_menu = NodePath("UI2/retryMenu")
 wall_resource = ExtResource("2_6wun7")
-mainCamera = NodePath("mainCamera")
-speed = 3.98
+mainCamera = NodePath("gameCamera")
 winCondition = 3
 size = 1000
+
+[node name="gameCamera" parent="." instance=ExtResource("3_tmwou")]
 
 [node name="UI2" type="CanvasLayer" parent="."]
 
 [node name="templateScoreHud" parent="UI2" instance=ExtResource("6_vnie8")]
+
+[node name="pauseMenuParent" parent="UI2" instance=ExtResource("4_8ess8")]
+
+[node name="retryMenu" parent="UI2" instance=ExtResource("6_86vi0")]
 
 [node name="stage" type="Node2D" parent="."]
 
@@ -58,16 +81,16 @@ player_res = SubResource("Resource_b3tta")
 position = Vector2(624, 168)
 difficulty = 10.0
 
-[node name="mainCamera" type="Node2D" parent="."]
-script = ExtResource("9_o4nxp")
-zoom = Vector2(0.8, 0.8)
-tween_resource = SubResource("Resource_rn1tq")
-
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.8, 0.8)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("8_wupvv")
+
+[node name="GameCamera" type="Node2D" parent="."]
+script = ExtResource("3_ooibm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5rean")
 
 [editable path="stage/playerGoal"]
 [editable path="stage/enemyGoal"]

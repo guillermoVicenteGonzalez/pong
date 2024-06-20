@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://645o0nlmtucu"]
+[gd_scene load_steps=4 format=3 uid="uid://645o0nlmtucu"]
 
 [ext_resource type="Script" path="res://scenes/level_elements/walls/wall.gd" id="1_xg3r0"]
+[ext_resource type="AudioStream" uid="uid://xdeqevf8cl6q" path="res://sounds/ballHits/ball-wall.wav" id="2_fhkj0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kc878"]
 size = Vector2(8, 8)
@@ -28,3 +29,15 @@ size_flags_vertical = 4
 unique_name_in_owner = true
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_kc878")
+
+[node name="ballHitSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_fhkj0")
+bus = &"Effects"
+
+[node name="wallArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 3
+
+[connection signal="body_entered" from="wallArea" to="." method="_on_wall_area_body_entered"]

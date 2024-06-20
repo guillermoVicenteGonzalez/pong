@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://d5ci736u0rl"]
+
+[ext_resource type="Script" path="res://scenes/particles/particleEffect.gd" id="1_2rtch"]
+
+[sub_resource type="Gradient" id="Gradient_0ma22"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_u0crb"]
+gradient = SubResource("Gradient_0ma22")
+
+[sub_resource type="Curve" id="Curve_q1vib"]
+max_value = 100.0
+_data = [Vector2(0.91404, 3.19149), 0.0, 0.0, 0, 0, Vector2(0.991404, 97.0885), 984.367, 187.181, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kdd1d"]
+curve = SubResource("Curve_q1vib")
+
+[sub_resource type="Curve" id="Curve_tlnny"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.587393, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_w1fmh"]
+curve = SubResource("Curve_tlnny")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bhgik"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 1.0
+angle_min = -153.3
+angle_max = 198.7
+inherit_velocity_ratio = 0.325
+spread = 85.212
+flatness = 0.266
+initial_velocity_min = 143.62
+initial_velocity_max = 301.94
+angular_velocity_min = -314.05
+angular_velocity_max = 344.68
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -100.0
+linear_accel_max = -72.34
+linear_accel_curve = SubResource("CurveTexture_kdd1d")
+radial_accel_min = 95.75
+radial_accel_max = 95.75
+scale_min = 0.5
+scale_max = 12.0
+scale_curve = SubResource("CurveTexture_w1fmh")
+color_ramp = SubResource("GradientTexture1D_u0crb")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+modulate = Color(1.2, 1, 1, 1)
+self_modulate = Color(60, 1, 1, 1)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_bhgik")
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_2rtch")
+dies = true
