@@ -50,7 +50,9 @@ color_ramp = SubResource("GradientTexture1D_u0crb")
 [node name="GPUParticles2D" type="GPUParticles2D"]
 modulate = Color(1.2, 1, 1, 1)
 self_modulate = Color(60, 1, 1, 1)
+emitting = false
 process_material = SubResource("ParticleProcessMaterial_bhgik")
+one_shot = true
 explosiveness = 1.0
 script = ExtResource("1_2rtch")
 dies = true

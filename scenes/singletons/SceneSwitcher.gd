@@ -28,6 +28,7 @@ func changeSceneToPacked(nScene:PackedScene, currentScene:Node=null)->int:
 		
 	if currentScene == null:
 		currentScene = root.get_child(root.get_child_count()-1)
+		print_debug(currentScene)
 	print_debug(currentScene)
 	root.add_child(instance)
 	currentScene.queue_free()

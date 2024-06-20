@@ -54,7 +54,7 @@ func togglePause(flag:bool)->bool:
 		toggleVisible(flag)
 	return get_tree().paused
 
-func toggleVisible(flag:bool=false)->bool:
+func toggleVisible(flag=null)->bool:
 #await for animation
 	if flag == null:
 		if visible:

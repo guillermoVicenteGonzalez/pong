@@ -12,6 +12,7 @@ extends Node2D
 
 @export_category("UI")
 @export var score_hud:ScoreHUD
+@export var retry_menu:RetryMenu
 
 @export_category("WALLS")
 @export var wall_resource:PackedScene
@@ -68,6 +69,23 @@ func _ready()->void:
 #========================================
 # LEVEL SETUP
 #========================================
+
+func initiateLevel():
+	setBgColor()
+	players = get_tree().get_nodes_in_group("players") as Array[Player]
+	size = setupDimensions(size)
+	HSize = size
+	VSize = size / 2
+	player1_score = 0
+	player2_score = 0
+	score_hud.setPlayerScore(0,1)
+	score_hud.setPlayerScore(0,2)
+	enemy_player.setDifficulty(difficulty)
+	stage_center = Vector2(HSize/2, VSize /2)
+	generateStage(HSize, VSize)
+	resetLevel( 1, stage_center)
+	initializePlayersPos(players, HSize, VSize)
+
 
 func createBall(position:Vector2)->Ball:
 	var b = ballScene.instantiate()
@@ -161,6 +179,7 @@ func gameOver(playerIndex:int):
 	get_tree().paused = true
 	score_hud.setMessage("player " + str(playerIndex) + " wins!!")
 	score_hud.toggleMessage(true)
+	retry_menu.toggleVisible(true)
 	#game over menu
 
 func calculateZoom(size:float)->float:

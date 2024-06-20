@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=15 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://baf8d2h5omqhv" path="res://scenes/ui/menus/pause/pause_menu.tscn" id="4_8ess8"]
 [ext_resource type="PackedScene" uid="uid://bcjoqak2adlkg" path="res://scenes/level_elements/goal.tscn" id="5_1koxp"]
 [ext_resource type="PackedScene" uid="uid://b2uodpgrbkq7t" path="res://scenes/player/enemyPlayer/enemy_player.tscn" id="6_0inc0"]
+[ext_resource type="PackedScene" uid="uid://bpyww1npfu0ei" path="res://scenes/ui/menus/retry/retry_menu.tscn" id="6_86vi0"]
 [ext_resource type="PackedScene" uid="uid://cfpwe4knw5jf" path="res://scenes/ui/template_score_hud.tscn" id="6_vnie8"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_wupvv"]
 
@@ -36,12 +37,13 @@ glow_blend_mode = 1
 glow_hdr_luminance_cap = 2.0
 fog_light_energy = 1.66
 
-[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "mainCamera")]
+[node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "retry_menu", "mainCamera") groups=["Level"]]
 process_mode = 3
 script = ExtResource("1_y6tow")
 player1_goal = NodePath("stage/playerGoal")
 player2_goal = NodePath("stage/enemyGoal")
 score_hud = NodePath("UI2/templateScoreHud")
+retry_menu = NodePath("UI2/retryMenu")
 wall_resource = ExtResource("2_6wun7")
 mainCamera = NodePath("gameCamera")
 winCondition = 3
@@ -54,6 +56,8 @@ size = 1000
 [node name="templateScoreHud" parent="UI2" instance=ExtResource("6_vnie8")]
 
 [node name="pauseMenuParent" parent="UI2" instance=ExtResource("4_8ess8")]
+
+[node name="retryMenu" parent="UI2" instance=ExtResource("6_86vi0")]
 
 [node name="stage" type="Node2D" parent="."]
 
