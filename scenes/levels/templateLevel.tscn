@@ -26,7 +26,8 @@ tonemap_exposure = 7.28
 tonemap_white = 3.39
 glow_enabled = true
 glow_levels/1 = 1.0
-glow_levels/2 = 1.0
+glow_levels/2 = 0.16
+glow_levels/3 = 0.32
 glow_levels/4 = 1.0
 glow_levels/6 = 1.0
 glow_levels/7 = 1.0
@@ -34,7 +35,9 @@ glow_intensity = 3.67
 glow_strength = 0.08
 glow_bloom = 1.0
 glow_blend_mode = 1
-glow_hdr_luminance_cap = 2.0
+glow_hdr_threshold = 0.63
+glow_hdr_scale = 0.99
+glow_hdr_luminance_cap = 0.95
 fog_light_energy = 1.66
 
 [node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "retry_menu", "mainCamera") groups=["Level"]]

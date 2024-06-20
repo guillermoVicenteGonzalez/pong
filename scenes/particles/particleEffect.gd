@@ -12,7 +12,7 @@ signal effect_finished
 
 func _ready() -> void:
 	one_shot = dies
-	print_debug(one_shot)
+
 
 func setDirection(dir:Vector2):
 	pass

@@ -180,7 +180,6 @@ func gameOver(playerIndex:int):
 	score_hud.setMessage("player " + str(playerIndex) + " wins!!")
 	score_hud.toggleMessage(true)
 	retry_menu.toggleVisible(true)
-	#game over menu
 
 func calculateZoom(size:float)->float:
 	var decrement = (size - 600)/100
