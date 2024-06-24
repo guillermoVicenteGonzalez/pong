@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://chwddhokjyu27"]
+
+[ext_resource type="Script" path="res://scenes/ui/cards/Hand/hand.gd" id="1_g5tk1"]
+
+[node name="Hand" type="HBoxContainer"]
+anchors_preset = -1
+anchor_top = 0.658
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.11998
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g5tk1")

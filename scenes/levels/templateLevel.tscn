@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3332wnm6hspr"]
+[gd_scene load_steps=17 format=3 uid="uid://b3332wnm6hspr"]
 
 [ext_resource type="PackedScene" uid="uid://d2keqyv2ve2e8" path="res://scenes/player/mainPlayer/mainPlayer.tscn" id="1_vvydk"]
 [ext_resource type="Script" path="res://scenes/levels/templateLevel.gd" id="1_y6tow"]
@@ -19,13 +19,22 @@ speed = 300
 length = 0
 acc = 200
 
+[sub_resource type="Gradient" id="Gradient_j23h8"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_echc1"]
+gradient = SubResource("Gradient_j23h8")
+fill_from = Vector2(0.363248, 0.0555556)
+fill_to = Vector2(0.760684, 0.239316)
+
 [sub_resource type="Environment" id="Environment_5rean"]
 background_mode = 3
+background_energy_multiplier = 0.76
+ambient_light_color = Color(33.701, 0.24, 0.599, 1)
 tonemap_mode = 1
 tonemap_exposure = 7.28
 tonemap_white = 3.39
 glow_enabled = true
-glow_levels/1 = 1.0
+glow_levels/1 = 0.62
 glow_levels/2 = 0.16
 glow_levels/3 = 0.32
 glow_levels/4 = 1.0
@@ -35,10 +44,13 @@ glow_intensity = 3.67
 glow_strength = 0.08
 glow_bloom = 1.0
 glow_blend_mode = 1
-glow_hdr_threshold = 0.63
+glow_hdr_threshold = 0.05
 glow_hdr_scale = 0.99
 glow_hdr_luminance_cap = 0.95
 fog_light_energy = 1.66
+adjustment_enabled = true
+adjustment_saturation = 2.0
+adjustment_color_correction = SubResource("GradientTexture2D_echc1")
 
 [node name="TemplateLevel" type="Node2D" node_paths=PackedStringArray("player1_goal", "player2_goal", "score_hud", "retry_menu", "mainCamera") groups=["Level"]]
 process_mode = 3
