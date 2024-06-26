@@ -2,13 +2,19 @@ class_name Card
 
 extends Node
 
+var _card_res:CardResource
 var _name:String :set = setName , get=getName
 var _cost:int :set = setCost , get=getCost
 var _effect:String :set = setEffect , get=getEffect
 var _action:Callable :set = setAction , get=getAction
 
 
-func _init(name:String, cost:int, effect:String, action:Callable ):
+func _init(res:CardResource):
+	_card_res = res
+	if res.name: setName(res.name)
+	if res.cost: setCost(res.cost)
+	if res.name: setEffect(res.name)
+	if res.name: setName(res.name)
 	pass
 
 

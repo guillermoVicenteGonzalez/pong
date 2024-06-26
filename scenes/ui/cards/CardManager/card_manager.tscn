@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://c4leah4vna73"]
+[gd_scene load_steps=3 format=3 uid="uid://c4leah4vna73"]
+
+[ext_resource type="PackedScene" uid="uid://chwddhokjyu27" path="res://scenes/ui/cards/Hand/hand.tscn" id="1_nayxj"]
+[ext_resource type="PackedScene" uid="uid://c085laf1maa2g" path="res://scenes/ui/cards/Deck/deckUI.tscn" id="2_2e4bu"]
 
 [node name="CardManager" type="Control"]
 layout_mode = 3
@@ -7,3 +10,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Hand" parent="." instance=ExtResource("1_nayxj")]
+layout_mode = 0
+
+[node name="Deck" parent="." instance=ExtResource("2_2e4bu")]
+layout_mode = 1
+
+[node name="Effects" type="Node" parent="."]

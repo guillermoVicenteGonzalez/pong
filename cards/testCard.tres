@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardResource" load_steps=2 format=3 uid="uid://daps1r4bidsdq"]
+
+[ext_resource type="Script" path="res://CardResource.gd" id="1_0fmgd"]
+
+[resource]
+script = ExtResource("1_0fmgd")
+name = "guillermo"
+cost = 1
+effect = "Come mis huevos"
+action_name = "test"

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://chwddhokjyu27"]
+
+[ext_resource type="Script" path="res://scenes/ui/cards/Hand/hand.gd" id="1_g5tk1"]
+
+[node name="Hand" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_g5tk1")
