@@ -2,7 +2,7 @@ extends HBoxContainer
 
 
 ## Array de card resources?
-var cards:Array
+var cards:Array[Card]
 #var CardUI_scene = preload("res://scenes/ui/cards/CardUI/card_ui.tscn")
 const TEST_CARD = preload("res://cards/testCard.tres")
 
