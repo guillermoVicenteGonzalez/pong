@@ -8,11 +8,6 @@ const TEST_CARD = preload("res://cards/testCard.tres")
 
 func _ready() -> void:
 	for i in 5:
-		#var tempUI:CardUI = CardUI.new_card()
-		#var tempUI = CardScene.instantiate()
-		#tempUI.setCardName("guillermo " + str(i))
-		#add_child(tempUI)
-		#self.add_child(tempUI)
 		var card:Card = Card.new(TEST_CARD)
 		var newCard:CardUI = await CardUI.new_card(card)
 		add_child(newCard)

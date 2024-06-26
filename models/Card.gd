@@ -32,12 +32,14 @@ func setName(nName:String)->void:
 	_name = nName
 	
 func getName()->String:
+	if _name == null: return "undefined"
 	return _name
 	
 func setCost(nCost:int)->void:
 	_cost = nCost
 	
 func getCost()->int:
+	if _cost == null: return -1
 	return _cost
 	
 func setAction(nAction:Callable)->void:
