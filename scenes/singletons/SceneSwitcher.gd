@@ -12,6 +12,7 @@ func changeScene(nScene:String, currentScene:Node=null)->int:
 	if !instance:
 		return -2
 		
+	print_debug(currentScene)
 	if currentScene == null:
 		currentScene = root.get_child(root.get_child_count()-1)
 

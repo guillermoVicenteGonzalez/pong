@@ -4,4 +4,4 @@ extends Control
 @onready var deck: DeckUI = %Deck
 
 func _ready()->void:
-	
+	var myDeck:Deck = Deck.new()
